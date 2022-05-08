@@ -191,7 +191,7 @@
 						"dependsOn": [],
 						"userProperties": [],
 						"typeProperties": {
-							"waitTimeInSeconds": 8
+							"waitTimeInSeconds": 15
 						}
 					}
 				],
