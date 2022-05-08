@@ -1,0 +1,2556 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "数据工厂名称",
+			"defaultValue": "aaslab"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "[concat(parameters('factoryName'), '/kk_csvtest1')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "aasstorage",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"fileName": "test234.csv",
+						"folderPath": "Test",
+						"fileSystem": "inbound"
+					},
+					"columnDelimiter": "||$||",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"name": "column",
+						"type": "String"
+					},
+					{
+						"name": "data",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/mysql_qm')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "aasmysql",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureMySqlTable",
+				"schema": [],
+				"typeProperties": {
+					"tableName": "`qm`"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/mysql_se')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "aasmysql",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureMySqlTable",
+				"schema": [],
+				"typeProperties": {
+					"tableName": "`se`"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/parquet1')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "aasstorage",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "Parquet",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"folderPath": "t1",
+						"fileSystem": "staging"
+					},
+					"compressionCodec": "snappy"
+				},
+				"schema": []
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/qm')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "aasmysql",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureMySqlTable",
+				"schema": [
+					{
+						"name": "res_name",
+						"precision": 100,
+						"scale": 0
+					},
+					{
+						"name": "res_code",
+						"precision": 100,
+						"scale": 0
+					},
+					{
+						"name": "biz_city",
+						"precision": 100,
+						"scale": 0
+					},
+					{
+						"name": "brand",
+						"precision": 100,
+						"scale": 0
+					},
+					{
+						"name": "city",
+						"precision": 100,
+						"scale": 0
+					},
+					{
+						"name": "apply_type",
+						"precision": 100,
+						"scale": 0
+					},
+					{
+						"name": "is_partia",
+						"precision": 100,
+						"scale": 0
+					},
+					{
+						"name": "mgt_mode",
+						"precision": 100,
+						"scale": 0
+					},
+					{
+						"name": "aduit",
+						"precision": 232,
+						"scale": 0
+					},
+					{
+						"name": "spec",
+						"precision": 232,
+						"scale": 0
+					},
+					{
+						"name": "location",
+						"precision": 100,
+						"scale": 0
+					},
+					{
+						"name": "check_date",
+						"precision": 19,
+						"scale": 0
+					},
+					{
+						"name": "first_commit_date",
+						"precision": 19,
+						"scale": 0
+					},
+					{
+						"name": "check_person",
+						"precision": 100,
+						"scale": 0
+					},
+					{
+						"name": "reason",
+						"precision": 232,
+						"scale": 0
+					},
+					{
+						"name": "pe_check",
+						"precision": 100,
+						"scale": 0
+					},
+					{
+						"name": "status",
+						"precision": 100,
+						"scale": 0
+					},
+					{
+						"name": "plan_date",
+						"precision": 19,
+						"scale": 0
+					},
+					{
+						"name": "actual_date",
+						"precision": 19,
+						"scale": 0
+					},
+					{
+						"name": "change_photo",
+						"precision": 100,
+						"scale": 0
+					},
+					{
+						"name": "review_result",
+						"precision": 232,
+						"scale": 0
+					},
+					{
+						"name": "review_comment",
+						"precision": 232,
+						"scale": 0
+					},
+					{
+						"name": "pms_cm",
+						"precision": 100,
+						"scale": 0
+					},
+					{
+						"name": "review_desc",
+						"precision": 232,
+						"scale": 0
+					},
+					{
+						"name": "p_level",
+						"precision": 100,
+						"scale": 0
+					},
+					{
+						"name": "score",
+						"precision": 18,
+						"scale": 4
+					},
+					{
+						"name": "project_director",
+						"precision": 100,
+						"scale": 0
+					},
+					{
+						"name": "project_engineer",
+						"precision": 100,
+						"scale": 0
+					},
+					{
+						"name": "company_type",
+						"precision": 100,
+						"scale": 0
+					},
+					{
+						"name": "company_name",
+						"precision": 100,
+						"scale": 0
+					},
+					{
+						"name": "company_pm",
+						"precision": 100,
+						"scale": 0
+					},
+					{
+						"name": "start_date",
+						"precision": 19,
+						"scale": 0
+					},
+					{
+						"name": "complete_date",
+						"precision": 19,
+						"scale": 0
+					},
+					{
+						"name": "open_date",
+						"precision": 19,
+						"scale": 0
+					}
+				],
+				"typeProperties": {
+					"tableName": "`qm`"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/se')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "aasstorage",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"fileName": "se.csv",
+						"folderPath": "bronze",
+						"fileSystem": "aasbase"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/sql_pc')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "aasmysql",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureMySqlTable",
+				"schema": [
+					{
+						"name": "pk",
+						"precision": 10,
+						"scale": 0
+					},
+					{
+						"name": "market",
+						"precision": 100,
+						"scale": 0
+					},
+					{
+						"name": "city",
+						"precision": 100,
+						"scale": 0
+					},
+					{
+						"name": "brand",
+						"precision": 100,
+						"scale": 0
+					},
+					{
+						"name": "res_name",
+						"precision": 100,
+						"scale": 0
+					},
+					{
+						"name": "res_code",
+						"precision": 100,
+						"scale": 0
+					},
+					{
+						"name": "apply_type",
+						"precision": 100,
+						"scale": 0
+					},
+					{
+						"name": "res_type",
+						"precision": 100,
+						"scale": 0
+					},
+					{
+						"name": "biz_model",
+						"precision": 100,
+						"scale": 0
+					},
+					{
+						"name": "desgin_model",
+						"precision": 100,
+						"scale": 0
+					},
+					{
+						"name": "is_jiameng",
+						"precision": 100,
+						"scale": 0
+					},
+					{
+						"name": "modify_range",
+						"precision": 100,
+						"scale": 0
+					},
+					{
+						"name": "floor",
+						"precision": 100,
+						"scale": 0
+					},
+					{
+						"name": "is_jiaceng",
+						"precision": 100,
+						"scale": 0
+					},
+					{
+						"name": "actual_seat",
+						"precision": 10,
+						"scale": 0
+					},
+					{
+						"name": "actual_area",
+						"precision": 18,
+						"scale": 4
+					},
+					{
+						"name": "k_area",
+						"precision": 18,
+						"scale": 4
+					},
+					{
+						"name": "c_area",
+						"precision": 18,
+						"scale": 4
+					},
+					{
+						"name": "start_date",
+						"precision": 19,
+						"scale": 0
+					},
+					{
+						"name": "complete_date",
+						"precision": 19,
+						"scale": 0
+					},
+					{
+						"name": "open_date",
+						"precision": 19,
+						"scale": 0
+					},
+					{
+						"name": "close_date",
+						"precision": 19,
+						"scale": 0
+					},
+					{
+						"name": "commit_date",
+						"precision": 19,
+						"scale": 0
+					},
+					{
+						"name": "design_company",
+						"precision": 100,
+						"scale": 0
+					},
+					{
+						"name": "imp_company",
+						"precision": 100,
+						"scale": 0
+					},
+					{
+						"name": "pe",
+						"precision": 100,
+						"scale": 0
+					},
+					{
+						"name": "pms",
+						"precision": 100,
+						"scale": 0
+					},
+					{
+						"name": "qs",
+						"precision": 100,
+						"scale": 0
+					},
+					{
+						"name": "qss",
+						"precision": 100,
+						"scale": 0
+					},
+					{
+						"name": "change_order_status",
+						"precision": 100,
+						"scale": 0
+					},
+					{
+						"name": "change_type",
+						"precision": 100,
+						"scale": 0
+					},
+					{
+						"name": "chagne_part",
+						"precision": 100,
+						"scale": 0
+					},
+					{
+						"name": "plan_date",
+						"precision": 19,
+						"scale": 0
+					},
+					{
+						"name": "change_desc",
+						"precision": 232,
+						"scale": 0
+					},
+					{
+						"name": "sub_item",
+						"precision": 100,
+						"scale": 0
+					},
+					{
+						"name": "change_reason",
+						"precision": 232,
+						"scale": 0
+					},
+					{
+						"name": "change_reason2",
+						"precision": 232,
+						"scale": 0
+					},
+					{
+						"name": "pe_inc_desc",
+						"precision": 100,
+						"scale": 0
+					},
+					{
+						"name": "pe_de_desc",
+						"precision": 100,
+						"scale": 0
+					},
+					{
+						"name": "pe_direct_fee",
+						"precision": 18,
+						"scale": 4
+					},
+					{
+						"name": "com_inc_desc",
+						"precision": 100,
+						"scale": 0
+					},
+					{
+						"name": "com_de_desc",
+						"precision": 100,
+						"scale": 0
+					},
+					{
+						"name": "com_direct_fee",
+						"precision": 18,
+						"scale": 4
+					},
+					{
+						"name": "qs_inc_desc",
+						"precision": 100,
+						"scale": 0
+					},
+					{
+						"name": "qs_de_desc",
+						"precision": 100,
+						"scale": 0
+					},
+					{
+						"name": "qs_direct_fee",
+						"precision": 18,
+						"scale": 4
+					},
+					{
+						"name": "order_status2",
+						"precision": 100,
+						"scale": 0
+					},
+					{
+						"name": "plan_change_fee",
+						"precision": 18,
+						"scale": 4
+					},
+					{
+						"name": "qs_fee",
+						"precision": 18,
+						"scale": 4
+					},
+					{
+						"name": "qss_fee",
+						"precision": 18,
+						"scale": 4
+					},
+					{
+						"name": "pj_commit_date",
+						"precision": 100,
+						"scale": 0
+					},
+					{
+						"name": "pj_pms_date",
+						"precision": 100,
+						"scale": 0
+					},
+					{
+						"name": "pj_cm_date",
+						"precision": 100,
+						"scale": 0
+					},
+					{
+						"name": "pj_pe_date",
+						"precision": 100,
+						"scale": 0
+					},
+					{
+						"name": "pj_pms_date2",
+						"precision": 100,
+						"scale": 0
+					},
+					{
+						"name": "pj_cm_date2",
+						"precision": 100,
+						"scale": 0
+					},
+					{
+						"name": "js_com_commit_date",
+						"precision": 100,
+						"scale": 0
+					},
+					{
+						"name": "js_pe_date",
+						"precision": 100,
+						"scale": 0
+					},
+					{
+						"name": "js_pms_date",
+						"precision": 100,
+						"scale": 0
+					},
+					{
+						"name": "bj_change_date",
+						"precision": 100,
+						"scale": 0
+					},
+					{
+						"name": "bj_qs_date",
+						"precision": 100,
+						"scale": 0
+					},
+					{
+						"name": "bj_qss_date",
+						"precision": 100,
+						"scale": 0
+					},
+					{
+						"name": "js2_com_date",
+						"precision": 100,
+						"scale": 0
+					},
+					{
+						"name": "js2_pe_date",
+						"precision": 100,
+						"scale": 0
+					},
+					{
+						"name": "js2_pms_date",
+						"precision": 100,
+						"scale": 0
+					},
+					{
+						"name": "jsb_commit_date",
+						"precision": 100,
+						"scale": 0
+					},
+					{
+						"name": "jsb_qs_date",
+						"precision": 100,
+						"scale": 0
+					},
+					{
+						"name": "jsb_qss_date",
+						"precision": 100,
+						"scale": 0
+					},
+					{
+						"name": "project_timely",
+						"precision": 100,
+						"scale": 0
+					},
+					{
+						"name": "pe_reject_no",
+						"precision": 100,
+						"scale": 0
+					},
+					{
+						"name": "pe_reject_reason",
+						"precision": 100,
+						"scale": 0
+					},
+					{
+						"name": "pm_reject_no",
+						"precision": 100,
+						"scale": 0
+					},
+					{
+						"name": "pms_reject_reason",
+						"precision": 100,
+						"scale": 0
+					},
+					{
+						"name": "qs_reject_no",
+						"precision": 100,
+						"scale": 0
+					},
+					{
+						"name": "qs_reject_reason",
+						"precision": 100,
+						"scale": 0
+					},
+					{
+						"name": "qss_reject_no",
+						"precision": 100,
+						"scale": 0
+					},
+					{
+						"name": "qss_reject_reason",
+						"precision": 100,
+						"scale": 0
+					},
+					{
+						"name": "cm_reject_no",
+						"precision": 100,
+						"scale": 0
+					},
+					{
+						"name": "cm_reject_reason",
+						"precision": 100,
+						"scale": 0
+					}
+				],
+				"typeProperties": {
+					"tableName": "`project_change`"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/stg_weather')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "aasstorage",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "Json",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"fileName": "shanghai.json",
+						"folderPath": "bronze/weather",
+						"fileSystem": "aasbase"
+					}
+				},
+				"schema": {
+					"type": "object",
+					"properties": {
+						"results": {
+							"type": "array",
+							"items": {
+								"type": "object",
+								"properties": {
+									"location": {
+										"type": "object",
+										"properties": {
+											"id": {
+												"type": "string"
+											},
+											"name": {
+												"type": "string"
+											},
+											"country": {
+												"type": "string"
+											},
+											"path": {
+												"type": "string"
+											},
+											"timezone": {
+												"type": "string"
+											},
+											"timezone_offset": {
+												"type": "string"
+											}
+										}
+									},
+									"now": {
+										"type": "object",
+										"properties": {
+											"text": {
+												"type": "string"
+											},
+											"code": {
+												"type": "string"
+											},
+											"temperature": {
+												"type": "string"
+											}
+										}
+									},
+									"last_update": {
+										"type": "string"
+									}
+								}
+							}
+						}
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/sys_tables_csv')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "aasstorage",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"fileName": "systables.csv",
+						"folderPath": "bronze",
+						"fileSystem": "aasbase"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": []
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/t2')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "aaslab_azure_sql",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "V1",
+						"type": "nvarchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "mio",
+					"table": "T2"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/template')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "blobtemplate",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "Excel",
+				"typeProperties": {
+					"sheetName": "Scenario Data",
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "P&L Datasource Template.xlsx",
+						"container": "data"
+					},
+					"firstRowAsHeader": true
+				},
+				"schema": []
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/weather_json')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "rest_get_weather",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "Json",
+				"typeProperties": {
+					"location": {
+						"type": "HttpServerLocation"
+					}
+				},
+				"schema": {}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/msi_acl_cluster')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureDatabricks",
+				"typeProperties": {
+					"domain": "https://adb-703617936550726.2.databricks.azure.cn",
+					"authentication": "MSI",
+					"workspaceResourceId": "/subscriptions/b576cca1-1304-45fb-9d2c-092dd6783357/resourceGroups/aaslab/providers/Microsoft.Databricks/workspaces/aas_databricks",
+					"credential": {
+						"referenceName": "adbmi_cre",
+						"type": "CredentialReference"
+					},
+					"existingClusterId": "0502-023914-rypf5z2r"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/msi_job')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureDatabricks",
+				"typeProperties": {
+					"domain": "https://adb-703617936550726.2.databricks.azure.cn",
+					"authentication": "MSI",
+					"workspaceResourceId": "/subscriptions/b576cca1-1304-45fb-9d2c-092dd6783357/resourceGroups/aaslab/providers/Microsoft.Databricks/workspaces/aas_databricks",
+					"credential": {
+						"referenceName": "adbmi_cre",
+						"type": "CredentialReference"
+					},
+					"instancePoolId": "0502-015605-wells3-pool-hi9ye0m5",
+					"newClusterNumOfWorker": "1",
+					"newClusterSparkEnvVars": {
+						"PYSPARK_PYTHON": "/databricks/python3/bin/python3"
+					},
+					"newClusterVersion": "10.4.x-scala2.12",
+					"newClusterInitScripts": [],
+					"clusterOption": "Fixed"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/adb1')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Run n1",
+						"type": "DatabricksNotebook",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"notebookPath": "/Users/needn@yzdazure.partner.onmschina.cn/Jobs/n1"
+						},
+						"linkedServiceName": {
+							"referenceName": "msi_job",
+							"type": "LinkedServiceReference"
+						}
+					},
+					{
+						"name": "Run n2",
+						"type": "DatabricksNotebook",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 2,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"notebookPath": "/Users/needn@yzdazure.partner.onmschina.cn/Jobs/n2"
+						},
+						"linkedServiceName": {
+							"referenceName": "msi_job",
+							"type": "LinkedServiceReference"
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"annotations": [],
+				"lastPublishTime": "2022-05-07T09:30:46Z"
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/msi_job')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/adls_to_azure_mysql')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Copy data1",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "DelimitedTextSource",
+								"storeSettings": {
+									"type": "AzureBlobFSReadSettings",
+									"recursive": true,
+									"enablePartitionDiscovery": false
+								},
+								"formatSettings": {
+									"type": "DelimitedTextReadSettings"
+								}
+							},
+							"sink": {
+								"type": "AzureMySqlSink",
+								"writeBatchSize": 10000,
+								"writeBatchTimeout": "00:00:30"
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"mappings": [
+									{
+										"source": {
+											"name": "res_name",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "res_name",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "res_code",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "res_code",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "biz_city",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "biz_city",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "brand",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "brand",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "city",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "city",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "apply_type",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "apply_type",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "is_partia",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "is_partia",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "aduit",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "aduit",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "spec",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "spec",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "location",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "location",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "check_date",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "check_date",
+											"type": "DateTime"
+										}
+									},
+									{
+										"source": {
+											"name": "first_commit_date",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "first_commit_date",
+											"type": "DateTime"
+										}
+									},
+									{
+										"source": {
+											"name": "check_person",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "check_person",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "reason",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "reason",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "pe_check",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "pe_check",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "check_photo",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "check_photo",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "status",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "status",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "plan_date",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "plan_date",
+											"type": "DateTime"
+										}
+									},
+									{
+										"source": {
+											"name": "actual_date",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "actual_date",
+											"type": "DateTime"
+										}
+									},
+									{
+										"source": {
+											"name": "change_photo",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "change_photo",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "review_result",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "review_result",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "review_comment",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "review_comment",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "pms_cm",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "pms_cm",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "review_desc",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "review_desc",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "p_level",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "p_level",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "score",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "p_score",
+											"type": "Decimal"
+										}
+									},
+									{
+										"source": {
+											"name": "p_amt",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "p_amt",
+											"type": "Decimal"
+										}
+									},
+									{
+										"source": {
+											"name": "project_director",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "project_director",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "project_engineer",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "project_engineer",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "company_type",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "company_type",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "company_name",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "company_name",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "company_pm",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "company_pm",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "start_date",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "start_date",
+											"type": "DateTime"
+										}
+									},
+									{
+										"source": {
+											"name": "complete_date",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "complete_date",
+											"type": "DateTime"
+										}
+									},
+									{
+										"source": {
+											"name": "open_date",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "open_date",
+											"type": "DateTime"
+										}
+									}
+								],
+								"typeConversion": true,
+								"typeConversionSettings": {
+									"allowDataTruncation": true,
+									"treatBooleanAsNumber": false
+								}
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "se",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "aasmysql",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"folder": {
+					"name": "copy_activity"
+				},
+				"annotations": [],
+				"lastPublishTime": "2021-06-24T11:51:11Z"
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/se')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/archive_excel')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Copy data1",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "BinarySource",
+								"storeSettings": {
+									"type": "AzureBlobFSReadSettings",
+									"recursive": true,
+									"wildcardFolderPath": "GR55",
+									"wildcardFileName": "t1.xlsx",
+									"deleteFilesAfterCompletion": true
+								},
+								"formatSettings": {
+									"type": "BinaryReadSettings"
+								}
+							},
+							"sink": {
+								"type": "BinarySink",
+								"storeSettings": {
+									"type": "AzureBlobFSWriteSettings",
+									"copyBehavior": "PreserveHierarchy"
+								}
+							},
+							"enableStaging": false
+						},
+						"inputs": [
+							{
+								"referenceName": "archive",
+								"type": "DatasetReference",
+								"parameters": {
+									"CONTAINER_NAME": "inbound",
+									"FOLDER_NAME": "GR55"
+								}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "archive",
+								"type": "DatasetReference",
+								"parameters": {
+									"CONTAINER_NAME": "archive",
+									"FOLDER_NAME": "GR55"
+								}
+							}
+						]
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"folder": {
+					"name": "copy_activity"
+				},
+				"annotations": [],
+				"lastPublishTime": "2022-03-03T09:35:09Z"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/avro_to_adls_gen2')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Copy data1",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "AvroSource",
+								"storeSettings": {
+									"type": "AzureBlobFSReadSettings",
+									"recursive": true,
+									"wildcardFolderPath": "*",
+									"wildcardFileName": "*.avro",
+									"enablePartitionDiscovery": false
+								}
+							},
+							"sink": {
+								"type": "DelimitedTextSink",
+								"storeSettings": {
+									"type": "AzureBlobFSWriteSettings",
+									"copyBehavior": "MergeFiles"
+								},
+								"formatSettings": {
+									"type": "DelimitedTextWriteSettings",
+									"quoteAllText": true,
+									"fileExtension": ".txt"
+								}
+							},
+							"enableStaging": false,
+							"validateDataConsistency": true,
+							"logSettings": {
+								"enableCopyActivityLog": true,
+								"copyActivityLogSettings": {
+									"logLevel": "Warning",
+									"enableReliableLogging": false
+								},
+								"logLocationSettings": {
+									"linkedServiceName": {
+										"referenceName": "aasstorage",
+										"type": "LinkedServiceReference"
+									},
+									"path": "aasbase/log"
+								}
+							},
+							"translator": {
+								"type": "TabularTranslator",
+								"mappings": [
+									{
+										"source": {
+											"name": "SequenceNumber",
+											"type": "Int64",
+											"physicalType": "long"
+										},
+										"sink": {
+											"name": "SequenceNumber",
+											"type": "String",
+											"physicalType": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Offset",
+											"type": "String",
+											"physicalType": "string"
+										},
+										"sink": {
+											"name": "Offset",
+											"type": "String",
+											"physicalType": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "EnqueuedTimeUtc",
+											"type": "String",
+											"physicalType": "string"
+										},
+										"sink": {
+											"name": "EnqueuedTimeUtc",
+											"type": "String",
+											"physicalType": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "SystemProperties",
+											"physicalType": "map"
+										},
+										"sink": {
+											"name": "SystemProperties",
+											"type": "String",
+											"physicalType": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Properties",
+											"physicalType": "map"
+										},
+										"sink": {
+											"name": "Properties",
+											"type": "String",
+											"physicalType": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Body",
+											"physicalType": "null | bytes"
+										},
+										"sink": {
+											"name": "Body",
+											"type": "String",
+											"physicalType": "String"
+										}
+									}
+								],
+								"typeConversion": true,
+								"typeConversionSettings": {
+									"allowDataTruncation": true,
+									"treatBooleanAsNumber": false
+								}
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "avro_demo",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "sys_tables_csv",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"folder": {
+					"name": "copy_activity"
+				},
+				"annotations": [],
+				"lastPublishTime": "2021-08-12T14:13:00Z"
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/sys_tables_csv')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/azuesql_to_azuresql')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Copy data1",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "AzureSqlSource",
+								"sqlReaderQuery": "SELECT * FROM t2",
+								"queryTimeout": "02:00:00",
+								"partitionOption": "None"
+							},
+							"sink": {
+								"type": "AzureSqlSink",
+								"writeBehavior": "insert",
+								"sqlWriterUseTableLock": false
+							},
+							"enableStaging": false,
+							"validateDataConsistency": true,
+							"translator": {
+								"type": "TabularTranslator",
+								"typeConversion": true,
+								"typeConversionSettings": {
+									"allowDataTruncation": true,
+									"treatBooleanAsNumber": false
+								}
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "azuresql_dummy",
+								"type": "DatasetReference",
+								"parameters": {
+									"TABLE_NAME": "t2"
+								}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "azuresql_t2",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"folder": {
+					"name": "copy_activity"
+				},
+				"annotations": [],
+				"lastPublishTime": "2022-02-18T08:48:48Z"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/azure_sql_to_adls_gen2')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Copy data1",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "AzureSqlSource",
+								"sqlReaderQuery": "SELECT * FROM sys.tables",
+								"queryTimeout": "02:00:00",
+								"partitionOption": "None"
+							},
+							"sink": {
+								"type": "DelimitedTextSink",
+								"storeSettings": {
+									"type": "AzureBlobFSWriteSettings"
+								},
+								"formatSettings": {
+									"type": "DelimitedTextWriteSettings",
+									"quoteAllText": true,
+									"fileExtension": ".txt"
+								}
+							},
+							"enableStaging": false,
+							"validateDataConsistency": true,
+							"logSettings": {
+								"enableCopyActivityLog": true,
+								"copyActivityLogSettings": {
+									"logLevel": "Warning",
+									"enableReliableLogging": false
+								},
+								"logLocationSettings": {
+									"linkedServiceName": {
+										"referenceName": "aasstorage",
+										"type": "LinkedServiceReference"
+									},
+									"path": "aasbase/log"
+								}
+							},
+							"translator": {
+								"type": "TabularTranslator",
+								"mappings": [
+									{
+										"source": {
+											"name": "name",
+											"type": "String",
+											"physicalType": "nvarchar"
+										},
+										"sink": {
+											"name": "name",
+											"type": "String",
+											"physicalType": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "object_id",
+											"type": "Int32",
+											"physicalType": "int"
+										},
+										"sink": {
+											"name": "object_id",
+											"type": "String",
+											"physicalType": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "principal_id",
+											"type": "Int32",
+											"physicalType": "int"
+										},
+										"sink": {
+											"name": "principal_id",
+											"type": "String",
+											"physicalType": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "schema_id",
+											"type": "Int32",
+											"physicalType": "int"
+										},
+										"sink": {
+											"name": "schema_id",
+											"type": "String",
+											"physicalType": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "parent_object_id",
+											"type": "Int32",
+											"physicalType": "int"
+										},
+										"sink": {
+											"name": "parent_object_id",
+											"type": "String",
+											"physicalType": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "type",
+											"type": "String",
+											"physicalType": "char"
+										},
+										"sink": {
+											"name": "type",
+											"type": "String",
+											"physicalType": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "type_desc",
+											"type": "String",
+											"physicalType": "nvarchar"
+										},
+										"sink": {
+											"name": "type_desc",
+											"type": "String",
+											"physicalType": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "create_date",
+											"type": "DateTime",
+											"physicalType": "datetime"
+										},
+										"sink": {
+											"name": "create_date",
+											"type": "String",
+											"physicalType": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "modify_date",
+											"type": "DateTime",
+											"physicalType": "datetime"
+										},
+										"sink": {
+											"name": "modify_date",
+											"type": "String",
+											"physicalType": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "is_ms_shipped",
+											"type": "Boolean",
+											"physicalType": "bit"
+										},
+										"sink": {
+											"name": "is_ms_shipped",
+											"type": "String",
+											"physicalType": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "is_published",
+											"type": "Boolean",
+											"physicalType": "bit"
+										},
+										"sink": {
+											"name": "is_published",
+											"type": "String",
+											"physicalType": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "is_schema_published",
+											"type": "Boolean",
+											"physicalType": "bit"
+										},
+										"sink": {
+											"name": "is_schema_published",
+											"type": "String",
+											"physicalType": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "lob_data_space_id",
+											"type": "Int32",
+											"physicalType": "int"
+										},
+										"sink": {
+											"name": "lob_data_space_id",
+											"type": "String",
+											"physicalType": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "filestream_data_space_id",
+											"type": "Int32",
+											"physicalType": "int"
+										},
+										"sink": {
+											"name": "filestream_data_space_id",
+											"type": "String",
+											"physicalType": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "max_column_id_used",
+											"type": "Int32",
+											"physicalType": "int"
+										},
+										"sink": {
+											"name": "max_column_id_used",
+											"type": "String",
+											"physicalType": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "lock_on_bulk_load",
+											"type": "Boolean",
+											"physicalType": "bit"
+										},
+										"sink": {
+											"name": "lock_on_bulk_load",
+											"type": "String",
+											"physicalType": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "uses_ansi_nulls",
+											"type": "Boolean",
+											"physicalType": "bit"
+										},
+										"sink": {
+											"name": "uses_ansi_nulls",
+											"type": "String",
+											"physicalType": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "is_replicated",
+											"type": "Boolean",
+											"physicalType": "bit"
+										},
+										"sink": {
+											"name": "is_replicated",
+											"type": "String",
+											"physicalType": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "has_replication_filter",
+											"type": "Boolean",
+											"physicalType": "bit"
+										},
+										"sink": {
+											"name": "has_replication_filter",
+											"type": "String",
+											"physicalType": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "is_merge_published",
+											"type": "Boolean",
+											"physicalType": "bit"
+										},
+										"sink": {
+											"name": "is_merge_published",
+											"type": "String",
+											"physicalType": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "is_sync_tran_subscribed",
+											"type": "Boolean",
+											"physicalType": "bit"
+										},
+										"sink": {
+											"name": "is_sync_tran_subscribed",
+											"type": "String",
+											"physicalType": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "has_unchecked_assembly_data",
+											"type": "Boolean",
+											"physicalType": "bit"
+										},
+										"sink": {
+											"name": "has_unchecked_assembly_data",
+											"type": "String",
+											"physicalType": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "text_in_row_limit",
+											"type": "Int32",
+											"physicalType": "int"
+										},
+										"sink": {
+											"name": "text_in_row_limit",
+											"type": "String",
+											"physicalType": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "large_value_types_out_of_row",
+											"type": "Boolean",
+											"physicalType": "bit"
+										},
+										"sink": {
+											"name": "large_value_types_out_of_row",
+											"type": "String",
+											"physicalType": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "is_tracked_by_cdc",
+											"type": "Boolean",
+											"physicalType": "bit"
+										},
+										"sink": {
+											"name": "is_tracked_by_cdc",
+											"type": "String",
+											"physicalType": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "lock_escalation",
+											"type": "Byte",
+											"physicalType": "tinyint"
+										},
+										"sink": {
+											"name": "lock_escalation",
+											"type": "String",
+											"physicalType": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "lock_escalation_desc",
+											"type": "String",
+											"physicalType": "nvarchar"
+										},
+										"sink": {
+											"name": "lock_escalation_desc",
+											"type": "String",
+											"physicalType": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "is_filetable",
+											"type": "Boolean",
+											"physicalType": "bit"
+										},
+										"sink": {
+											"name": "is_filetable",
+											"type": "String",
+											"physicalType": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "is_memory_optimized",
+											"type": "Boolean",
+											"physicalType": "bit"
+										},
+										"sink": {
+											"name": "is_memory_optimized",
+											"type": "String",
+											"physicalType": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "durability",
+											"type": "Byte",
+											"physicalType": "tinyint"
+										},
+										"sink": {
+											"name": "durability",
+											"type": "String",
+											"physicalType": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "durability_desc",
+											"type": "String",
+											"physicalType": "nvarchar"
+										},
+										"sink": {
+											"name": "durability_desc",
+											"type": "String",
+											"physicalType": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "temporal_type",
+											"type": "Byte",
+											"physicalType": "tinyint"
+										},
+										"sink": {
+											"name": "temporal_type",
+											"type": "String",
+											"physicalType": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "temporal_type_desc",
+											"type": "String",
+											"physicalType": "nvarchar"
+										},
+										"sink": {
+											"name": "temporal_type_desc",
+											"type": "String",
+											"physicalType": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "history_table_id",
+											"type": "Int32",
+											"physicalType": "int"
+										},
+										"sink": {
+											"name": "history_table_id",
+											"type": "String",
+											"physicalType": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "is_remote_data_archive_enabled",
+											"type": "Boolean",
+											"physicalType": "bit"
+										},
+										"sink": {
+											"name": "is_remote_data_archive_enabled",
+											"type": "String",
+											"physicalType": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "is_external",
+											"type": "Boolean",
+											"physicalType": "bit"
+										},
+										"sink": {
+											"name": "is_external",
+											"type": "String",
+											"physicalType": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "history_retention_period",
+											"type": "Int32",
+											"physicalType": "int"
+										},
+										"sink": {
+											"name": "history_retention_period",
+											"type": "String",
+											"physicalType": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "history_retention_period_unit",
+											"type": "Int32",
+											"physicalType": "int"
+										},
+										"sink": {
+											"name": "history_retention_period_unit",
+											"type": "String",
+											"physicalType": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "history_retention_period_unit_desc",
+											"type": "String",
+											"physicalType": "nvarchar"
+										},
+										"sink": {
+											"name": "history_retention_period_unit_desc",
+											"type": "String",
+											"physicalType": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "is_node",
+											"type": "Boolean",
+											"physicalType": "bit"
+										},
+										"sink": {
+											"name": "is_node",
+											"type": "String",
+											"physicalType": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "is_edge",
+											"type": "Boolean",
+											"physicalType": "bit"
+										},
+										"sink": {
+											"name": "is_edge",
+											"type": "String",
+											"physicalType": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "data_retention_period",
+											"type": "Int32",
+											"physicalType": "int"
+										},
+										"sink": {
+											"name": "data_retention_period",
+											"type": "String",
+											"physicalType": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "data_retention_period_unit",
+											"type": "Int32",
+											"physicalType": "int"
+										},
+										"sink": {
+											"name": "data_retention_period_unit",
+											"type": "String",
+											"physicalType": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "data_retention_period_unit_desc",
+											"type": "String",
+											"physicalType": "nvarchar"
+										},
+										"sink": {
+											"name": "data_retention_period_unit_desc",
+											"type": "String",
+											"physicalType": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "ledger_type",
+											"type": "Byte",
+											"physicalType": "tinyint"
+										},
+										"sink": {
+											"name": "ledger_type",
+											"type": "String",
+											"physicalType": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "ledger_type_desc",
+											"type": "String",
+											"physicalType": "nvarchar"
+										},
+										"sink": {
+											"name": "ledger_type_desc",
+											"type": "String",
+											"physicalType": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "ledger_view_id",
+											"type": "Int32",
+											"physicalType": "int"
+										},
+										"sink": {
+											"name": "ledger_view_id",
+											"type": "String",
+											"physicalType": "String"
+										}
+									}
+								],
+								"typeConversion": true,
+								"typeConversionSettings": {
+									"allowDataTruncation": true,
+									"treatBooleanAsNumber": false
+								}
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "azuresql_dummy",
+								"type": "DatasetReference",
+								"parameters": {
+									"TABLE_NAME": "t2"
+								}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "sys_tables_csv",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"folder": {
+					"name": "copy_activity"
+				},
+				"annotations": [],
+				"lastPublishTime": "2022-02-18T08:48:49Z"
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/sys_tables_csv')]"
+			]
+		}
+	]
+}

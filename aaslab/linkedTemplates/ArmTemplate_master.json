@@ -1,0 +1,262 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "数据工厂名称",
+			"defaultValue": "aaslab"
+		},
+		"AzureBlobStorage1_connectionString": {
+			"type": "secureString",
+			"metadata": "“AzureBlobStorage1”的“connectionString”的安全字符串"
+		},
+		"AzureSqlDatabase1_connectionString": {
+			"type": "secureString",
+			"metadata": "“AzureSqlDatabase1”的“connectionString”的安全字符串"
+		},
+		"SqlServer1_connectionString": {
+			"type": "secureString",
+			"metadata": "“SqlServer1”的“connectionString”的安全字符串"
+		},
+		"aaslab_azure_sql_connectionString": {
+			"type": "secureString",
+			"metadata": "“aaslab_azure_sql”的“connectionString”的安全字符串"
+		},
+		"aaslab_databricks_password": {
+			"type": "secureString",
+			"metadata": "“aaslab_databricks”的“password”的安全字符串"
+		},
+		"aaslab_deltalake_accessToken": {
+			"type": "secureString",
+			"metadata": "“aaslab_deltalake”的“accessToken”的安全字符串"
+		},
+		"aasmysql_connectionString": {
+			"type": "secureString",
+			"metadata": "“aasmysql”的“connectionString”的安全字符串"
+		},
+		"aasstorage_accountKey": {
+			"type": "secureString",
+			"metadata": "“aasstorage”的“accountKey”的安全字符串"
+		},
+		"adf_repo_connectionString": {
+			"type": "secureString",
+			"metadata": "“adf_repo”的“connectionString”的安全字符串"
+		},
+		"az_databricks_password": {
+			"type": "secureString",
+			"metadata": "“az_databricks”的“password”的安全字符串"
+		},
+		"blobtemplate_connectionString": {
+			"type": "secureString",
+			"metadata": "“blobtemplate”的“connectionString”的安全字符串"
+		},
+		"nanbintoken_accessToken": {
+			"type": "secureString",
+			"metadata": "“nanbintoken”的“accessToken”的安全字符串"
+		},
+		"nonspark_accessToken": {
+			"type": "secureString",
+			"metadata": "“nonspark”的“accessToken”的安全字符串"
+		},
+		"aaslab_databricks_properties_typeProperties_host": {
+			"type": "string",
+			"defaultValue": "adb-703617936550726.2.databricks.azure.cn"
+		},
+		"aaslab_databricks_properties_typeProperties_username": {
+			"type": "string",
+			"defaultValue": "token"
+		},
+		"aaslab_keyvault_properties_typeProperties_baseUrl": {
+			"type": "string",
+			"defaultValue": "https://aaslab.vault.azure.cn/"
+		},
+		"aasstorage_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://aasstorage.dfs.core.chinacloudapi.cn"
+		},
+		"az_databricks_properties_typeProperties_host": {
+			"type": "string",
+			"defaultValue": "adb-6762076916997835.3.databricks.azure.cn"
+		},
+		"az_databricks_properties_typeProperties_username": {
+			"type": "string",
+			"defaultValue": "token"
+		},
+		"rest_get_weather_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://api.seniverse.com/v3/weather/now.json?key=ScB4EUZrAvDaocug3&location=shanghai&language=zh-Hans&unit=c"
+		},
+		"containerUri": {
+			"type": "string",
+			"metadata": "包含链接 ARM 模板的存储帐户的 URI"
+		},
+		"containerSasToken": {
+			"type": "string",
+			"metadata": "包含链接 ARM 模板的存储帐户的 SAS 令牌"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "aaslab_ArmTemplate_0",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_0.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					},
+					"AzureBlobStorage1_connectionString": {
+						"value": "[parameters('AzureBlobStorage1_connectionString')]"
+					},
+					"AzureSqlDatabase1_connectionString": {
+						"value": "[parameters('AzureSqlDatabase1_connectionString')]"
+					},
+					"SqlServer1_connectionString": {
+						"value": "[parameters('SqlServer1_connectionString')]"
+					},
+					"aaslab_azure_sql_connectionString": {
+						"value": "[parameters('aaslab_azure_sql_connectionString')]"
+					},
+					"aaslab_databricks_password": {
+						"value": "[parameters('aaslab_databricks_password')]"
+					},
+					"aaslab_deltalake_accessToken": {
+						"value": "[parameters('aaslab_deltalake_accessToken')]"
+					},
+					"aasmysql_connectionString": {
+						"value": "[parameters('aasmysql_connectionString')]"
+					},
+					"aasstorage_accountKey": {
+						"value": "[parameters('aasstorage_accountKey')]"
+					},
+					"aaslab_databricks_properties_typeProperties_host": {
+						"value": "[parameters('aaslab_databricks_properties_typeProperties_host')]"
+					},
+					"aaslab_databricks_properties_typeProperties_username": {
+						"value": "[parameters('aaslab_databricks_properties_typeProperties_username')]"
+					},
+					"aaslab_keyvault_properties_typeProperties_baseUrl": {
+						"value": "[parameters('aaslab_keyvault_properties_typeProperties_baseUrl')]"
+					},
+					"aasstorage_properties_typeProperties_url": {
+						"value": "[parameters('aasstorage_properties_typeProperties_url')]"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "aaslab_ArmTemplate_1",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_1.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					},
+					"adf_repo_connectionString": {
+						"value": "[parameters('adf_repo_connectionString')]"
+					},
+					"az_databricks_password": {
+						"value": "[parameters('az_databricks_password')]"
+					},
+					"blobtemplate_connectionString": {
+						"value": "[parameters('blobtemplate_connectionString')]"
+					},
+					"nanbintoken_accessToken": {
+						"value": "[parameters('nanbintoken_accessToken')]"
+					},
+					"nonspark_accessToken": {
+						"value": "[parameters('nonspark_accessToken')]"
+					},
+					"az_databricks_properties_typeProperties_host": {
+						"value": "[parameters('az_databricks_properties_typeProperties_host')]"
+					},
+					"az_databricks_properties_typeProperties_username": {
+						"value": "[parameters('az_databricks_properties_typeProperties_username')]"
+					},
+					"rest_get_weather_properties_typeProperties_url": {
+						"value": "[parameters('rest_get_weather_properties_typeProperties_url')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'aaslab_ArmTemplate_0')]"
+			]
+		},
+		{
+			"name": "aaslab_ArmTemplate_2",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_2.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'aaslab_ArmTemplate_1')]"
+			]
+		},
+		{
+			"name": "aaslab_ArmTemplate_3",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_3.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'aaslab_ArmTemplate_2')]"
+			]
+		},
+		{
+			"name": "aaslab_ArmTemplate_4",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_4.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'aaslab_ArmTemplate_3')]"
+			]
+		}
+	]
+}

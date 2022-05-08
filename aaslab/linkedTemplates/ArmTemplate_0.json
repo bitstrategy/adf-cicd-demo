@@ -1,0 +1,1002 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "数据工厂名称",
+			"defaultValue": "aaslab"
+		},
+		"AzureBlobStorage1_connectionString": {
+			"type": "secureString",
+			"metadata": "“AzureBlobStorage1”的“connectionString”的安全字符串"
+		},
+		"AzureSqlDatabase1_connectionString": {
+			"type": "secureString",
+			"metadata": "“AzureSqlDatabase1”的“connectionString”的安全字符串"
+		},
+		"SqlServer1_connectionString": {
+			"type": "secureString",
+			"metadata": "“SqlServer1”的“connectionString”的安全字符串"
+		},
+		"aaslab_azure_sql_connectionString": {
+			"type": "secureString",
+			"metadata": "“aaslab_azure_sql”的“connectionString”的安全字符串"
+		},
+		"aaslab_databricks_password": {
+			"type": "secureString",
+			"metadata": "“aaslab_databricks”的“password”的安全字符串"
+		},
+		"aaslab_deltalake_accessToken": {
+			"type": "secureString",
+			"metadata": "“aaslab_deltalake”的“accessToken”的安全字符串"
+		},
+		"aasmysql_connectionString": {
+			"type": "secureString",
+			"metadata": "“aasmysql”的“connectionString”的安全字符串"
+		},
+		"aasstorage_accountKey": {
+			"type": "secureString",
+			"metadata": "“aasstorage”的“accountKey”的安全字符串"
+		},
+		"aaslab_databricks_properties_typeProperties_host": {
+			"type": "string",
+			"defaultValue": "adb-703617936550726.2.databricks.azure.cn"
+		},
+		"aaslab_databricks_properties_typeProperties_username": {
+			"type": "string",
+			"defaultValue": "token"
+		},
+		"aaslab_keyvault_properties_typeProperties_baseUrl": {
+			"type": "string",
+			"defaultValue": "https://aaslab.vault.azure.cn/"
+		},
+		"aasstorage_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://aasstorage.dfs.core.chinacloudapi.cn"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "[concat(parameters('factoryName'), '/f1')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Fail1",
+						"type": "Fail",
+						"dependsOn": [],
+						"userProperties": [],
+						"typeProperties": {
+							"message": "Not Found",
+							"errorCode": "404"
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"folder": {
+					"name": "demo"
+				},
+				"annotations": [],
+				"lastPublishTime": "2022-04-20T04:52:51Z"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/f2')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Fail1",
+						"type": "Fail",
+						"dependsOn": [],
+						"userProperties": [],
+						"typeProperties": {
+							"message": "Divide Zero",
+							"errorCode": "406"
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"folder": {
+					"name": "demo"
+				},
+				"annotations": [],
+				"lastPublishTime": "2022-04-20T04:53:26Z"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/foreach_demo')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "ForEach1",
+						"type": "ForEach",
+						"dependsOn": [],
+						"userProperties": [],
+						"typeProperties": {
+							"items": {
+								"value": "@pipeline().parameters.loop_list",
+								"type": "Expression"
+							},
+							"isSequential": true,
+							"activities": [
+								{
+									"name": "Set variable1",
+									"type": "SetVariable",
+									"dependsOn": [],
+									"userProperties": [],
+									"typeProperties": {
+										"variableName": "v1",
+										"value": {
+											"value": "@string(item()) ",
+											"type": "Expression"
+										}
+									}
+								}
+							]
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"parameters": {
+					"loop_list": {
+						"type": "array",
+						"defaultValue": [
+							1,
+							2
+						]
+					}
+				},
+				"variables": {
+					"v1": {
+						"type": "String"
+					}
+				},
+				"folder": {
+					"name": "control_flow"
+				},
+				"annotations": [],
+				"lastPublishTime": "2021-06-19T12:51:48Z"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/pipeline1_demo')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Wait1",
+						"type": "Wait",
+						"dependsOn": [],
+						"userProperties": [],
+						"typeProperties": {
+							"waitTimeInSeconds": 8
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"annotations": [],
+				"lastPublishTime": "2022-05-08T16:41:05Z"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/s1')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Wait1",
+						"type": "Wait",
+						"dependsOn": [],
+						"userProperties": [],
+						"typeProperties": {
+							"waitTimeInSeconds": 60
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"folder": {
+					"name": "demo"
+				},
+				"annotations": [],
+				"lastPublishTime": "2022-04-20T11:28:58Z"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/s2')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Wait1",
+						"type": "Wait",
+						"dependsOn": [],
+						"userProperties": [],
+						"typeProperties": {
+							"waitTimeInSeconds": 1
+						}
+					},
+					{
+						"name": "ForEach1",
+						"type": "ForEach",
+						"dependsOn": [
+							{
+								"activity": "Wait1",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"items": {
+								"value": "@range(1, 3)",
+								"type": "Expression"
+							},
+							"batchCount": 3,
+							"activities": [
+								{
+									"name": "Set variable1",
+									"type": "SetVariable",
+									"dependsOn": [],
+									"userProperties": [],
+									"typeProperties": {
+										"variableName": "v1",
+										"value": {
+											"value": "@item()",
+											"type": "Expression"
+										}
+									}
+								}
+							]
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"variables": {
+					"v1": {
+						"type": "String"
+					}
+				},
+				"folder": {
+					"name": "demo"
+				},
+				"annotations": [],
+				"lastPublishTime": "2022-05-07T05:01:35Z"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/s3')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Wait1",
+						"type": "Wait",
+						"dependsOn": [],
+						"userProperties": [],
+						"typeProperties": {
+							"waitTimeInSeconds": 1
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"folder": {
+					"name": "demo"
+				},
+				"annotations": [],
+				"lastPublishTime": "2022-04-20T04:51:53Z"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/s4')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Wait1",
+						"type": "Wait",
+						"dependsOn": [],
+						"userProperties": [],
+						"typeProperties": {
+							"waitTimeInSeconds": 1
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"folder": {
+					"name": "demo"
+				},
+				"annotations": [],
+				"lastPublishTime": "2022-04-20T04:51:53Z"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/tableau_refresh')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Tableau Sign In",
+						"type": "WebActivity",
+						"dependsOn": [
+							{
+								"activity": "Get Password in Key Vault",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": true
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"url": {
+								"value": "@{pipeline().parameters.BASE_URL}/auth/signin",
+								"type": "Expression"
+							},
+							"method": "POST",
+							"headers": {
+								"Content-Type": "application/json",
+								"Accept": "application/json"
+							},
+							"body": {
+								"credentials": {
+									"name": "Jcathy",
+									"password": "@{activity('Get Password in Key Vault').output.value}",
+									"site": {
+										"contentUrl": ""
+									}
+								}
+							},
+							"disableCertValidation": true
+						}
+					},
+					{
+						"name": "Set site id",
+						"type": "SetVariable",
+						"dependsOn": [
+							{
+								"activity": "Tableau Sign In",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"variableName": "site_id",
+							"value": {
+								"value": "@activity('Tableau Sign In').output.credentials.site.id\r\n",
+								"type": "Expression"
+							}
+						}
+					},
+					{
+						"name": "Set token",
+						"type": "SetVariable",
+						"dependsOn": [
+							{
+								"activity": "Tableau Sign In",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"variableName": "token",
+							"value": {
+								"value": "@activity('Tableau Sign In').output.credentials.token\n",
+								"type": "Expression"
+							}
+						}
+					},
+					{
+						"name": "Tableau Get workbook id",
+						"type": "WebActivity",
+						"dependsOn": [
+							{
+								"activity": "Set site id",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							},
+							{
+								"activity": "Set token",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"url": {
+								"value": "@{pipeline().parameters.BASE_URL}/sites/@{variables('site_id')}/workbooks?filter=name:eq:@{pipeline().parameters.WORKBOOK_NAME}",
+								"type": "Expression"
+							},
+							"method": "GET",
+							"headers": {
+								"Content-Type": "application/json",
+								"Accept": "application/json",
+								"X-Tableau-Auth": {
+									"value": "@variables('token')",
+									"type": "Expression"
+								}
+							},
+							"body": "",
+							"disableCertValidation": true
+						}
+					},
+					{
+						"name": "Tableau Refresh data source",
+						"type": "WebActivity",
+						"dependsOn": [
+							{
+								"activity": "Identify task",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"url": {
+								"value": "@{pipeline().parameters.BASE_URL}/sites/@{variables('site_id')}/tasks/extractRefreshes/@{activity('Identify task').output.Value[0].extractRefresh.id}/runNow",
+								"type": "Expression"
+							},
+							"method": "POST",
+							"headers": {
+								"X-Tableau-Auth": {
+									"value": "@variables('token')",
+									"type": "Expression"
+								},
+								"Accept": "application/xml",
+								"Content-Type": "application/xml"
+							},
+							"body": "<tsRequest></tsRequest>",
+							"disableCertValidation": false
+						}
+					},
+					{
+						"name": "Identify task",
+						"type": "Filter",
+						"dependsOn": [
+							{
+								"activity": "Tableau Get workbook id",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							},
+							{
+								"activity": "Tableau Get extract refreshes",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"items": {
+								"value": "@activity('Tableau Get extract refreshes').output.tasks.task",
+								"type": "Expression"
+							},
+							"condition": {
+								"value": "@and(\nequals(item().extractRefresh.schedule.name,  pipeline().parameters.SCHEDULE_NAME),\nequals(item().extractRefresh.workbook.id, activity('Tableau Get workbook id').output.workbooks.workbook[0].id )\n)",
+								"type": "Expression"
+							}
+						}
+					},
+					{
+						"name": "Tableau Get extract refreshes",
+						"type": "WebActivity",
+						"dependsOn": [
+							{
+								"activity": "Set site id",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							},
+							{
+								"activity": "Set token",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"url": {
+								"value": "@{pipeline().parameters.BASE_URL}/sites/@{variables('site_id')}/tasks/extractRefreshes",
+								"type": "Expression"
+							},
+							"method": "GET",
+							"headers": {
+								"Content-Type": "application/json",
+								"Accept": "application/json",
+								"X-Tableau-Auth": {
+									"value": "@variables('token')",
+									"type": "Expression"
+								}
+							},
+							"body": "",
+							"disableCertValidation": true
+						}
+					},
+					{
+						"name": "Get Password in Key Vault",
+						"type": "WebActivity",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": true,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"url": "https://aaslab.vault.azure.cn/secrets/tableau-password/0c79507fb3644c2f8a30b37d55abf8a6?api-version=7.0",
+							"method": "GET",
+							"headers": {},
+							"body": {
+								"credentials": {
+									"name": "klong4",
+									"password": "Gile@d2020",
+									"site": {
+										"contentUrl": "sprint"
+									}
+								}
+							},
+							"authentication": {
+								"type": "MSI",
+								"resource": "https://vault.azure.cn"
+							}
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"parameters": {
+					"BASE_URL": {
+						"type": "string",
+						"defaultValue": "http://10.184.16.220/api/3.7"
+					},
+					"WORKBOOK_NAME": {
+						"type": "string"
+					},
+					"SCHEDULE_NAME": {
+						"type": "string"
+					}
+				},
+				"variables": {
+					"site_id": {
+						"type": "String"
+					},
+					"token": {
+						"type": "String"
+					}
+				},
+				"folder": {
+					"name": "test"
+				},
+				"annotations": [],
+				"lastPublishTime": "2022-02-27T07:27:48Z"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/tableau_rest_demo')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Sign In",
+						"type": "WebActivity",
+						"dependsOn": [
+							{
+								"activity": "Get Password in Key Vault",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": true
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"url": "https://tableau-test.gileadchina.cn/api/3.4/auth/signin",
+							"method": "POST",
+							"headers": {
+								"Content-Type": "application/json",
+								"Accept": "application/json"
+							},
+							"body": {
+								"value": "{\"credentials\":{\"name\":\"klong4\",\"password\":\"@{activity('Get Password in Key Vault').output.value}\",\"site\":{\"contentUrl\":\"sprint\"}}}",
+								"type": "Expression"
+							}
+						}
+					},
+					{
+						"name": "Set token",
+						"type": "SetVariable",
+						"dependsOn": [
+							{
+								"activity": "Sign In",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"variableName": "token",
+							"value": {
+								"value": "@activity('Sign In').output.credentials.token",
+								"type": "Expression"
+							}
+						}
+					},
+					{
+						"name": "Set site id",
+						"type": "SetVariable",
+						"dependsOn": [
+							{
+								"activity": "Sign In",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"variableName": "site_id",
+							"value": {
+								"value": "@activity('Sign In').output.credentials.site.id",
+								"type": "Expression"
+							}
+						}
+					},
+					{
+						"name": "Get Tableau site user list",
+						"type": "WebActivity",
+						"dependsOn": [
+							{
+								"activity": "Set token",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							},
+							{
+								"activity": "Set site id",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"url": {
+								"value": "@concat('https://tableau-test.gileadchina.cn/api/3.4/sites/', variables('site_id') ,'/users')",
+								"type": "Expression"
+							},
+							"method": "GET",
+							"headers": {
+								"X-Tableau-Auth": {
+									"value": "@variables('token')",
+									"type": "Expression"
+								},
+								"Accept": "application/json"
+							},
+							"body": ""
+						}
+					},
+					{
+						"name": "Get Password in Key Vault",
+						"type": "WebActivity",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": true,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"url": "https://aaslab.vault.azure.cn/secrets/tableau-password/0c79507fb3644c2f8a30b37d55abf8a6?api-version=7.0",
+							"method": "GET",
+							"headers": {},
+							"body": {
+								"credentials": {
+									"name": "klong4",
+									"password": "Gile@d2020",
+									"site": {
+										"contentUrl": "sprint"
+									}
+								}
+							},
+							"authentication": {
+								"type": "MSI",
+								"resource": "https://vault.azure.cn"
+							}
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"parameters": {
+					"BASE_URL": {
+						"type": "string"
+					}
+				},
+				"variables": {
+					"site_id": {
+						"type": "String"
+					},
+					"token": {
+						"type": "String"
+					}
+				},
+				"folder": {
+					"name": "copy_activity"
+				},
+				"annotations": [],
+				"lastPublishTime": "2022-02-27T07:21:32Z"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureBlobStorage1')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureBlobStorage",
+				"typeProperties": {
+					"connectionString": "[parameters('AzureBlobStorage1_connectionString')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureSqlDatabase1')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureSqlDatabase",
+				"typeProperties": {
+					"connectionString": "[parameters('AzureSqlDatabase1_connectionString')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/SqlServer1')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "SqlServer",
+				"typeProperties": {
+					"connectionString": "[parameters('SqlServer1_connectionString')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/aas_adb')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureDatabricks",
+				"typeProperties": {
+					"domain": "https://adb-703617936550726.2.databricks.azure.cn",
+					"authentication": "MSI",
+					"workspaceResourceId": "/subscriptions/b576cca1-1304-45fb-9d2c-092dd6783357/resourceGroups/aaslab/providers/Microsoft.Databricks/workspaces/aas_databricks",
+					"newClusterNodeType": "Standard_F4s",
+					"newClusterNumOfWorker": "1",
+					"newClusterSparkEnvVars": {
+						"PYSPARK_PYTHON": "/databricks/python3/bin/python3"
+					},
+					"newClusterVersion": "8.2.x-scala2.12",
+					"newClusterInitScripts": [],
+					"clusterOption": "Fixed"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/aaslab_azure_sql')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureSqlDatabase",
+				"typeProperties": {
+					"connectionString": "[parameters('aaslab_azure_sql_connectionString')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/aaslab_databricks')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "Spark",
+				"typeProperties": {
+					"host": "[parameters('aaslab_databricks_properties_typeProperties_host')]",
+					"port": 443,
+					"serverType": "SparkThriftServer",
+					"thriftTransportProtocol": "HTTP",
+					"authenticationType": "UsernameAndPassword",
+					"username": "[parameters('aaslab_databricks_properties_typeProperties_username')]",
+					"password": {
+						"type": "SecureString",
+						"value": "[parameters('aaslab_databricks_password')]"
+					},
+					"httpPath": "sql/protocolv1/o/703617936550726/0512-034221-shelf112",
+					"enableSsl": true,
+					"useSystemTrustStore": false,
+					"allowHostNameCNMismatch": false,
+					"allowSelfSignedServerCert": false
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/aaslab_deltalake')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureDatabricksDeltaLake",
+				"typeProperties": {
+					"domain": "https://adb-703617936550726.2.databricks.azure.cn",
+					"clusterId": "0420-093301-376acrky",
+					"accessToken": {
+						"type": "SecureString",
+						"value": "[parameters('aaslab_deltalake_accessToken')]"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/aaslab_keyvault')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureKeyVault",
+				"typeProperties": {
+					"baseUrl": "[parameters('aaslab_keyvault_properties_typeProperties_baseUrl')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/aasmysql')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureMySql",
+				"typeProperties": {
+					"connectionString": "[parameters('aasmysql_connectionString')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/aasstorage')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureBlobFS",
+				"typeProperties": {
+					"url": "[parameters('aasstorage_properties_typeProperties_url')]",
+					"accountKey": {
+						"type": "SecureString",
+						"value": "[parameters('aasstorage_accountKey')]"
+					}
+				}
+			},
+			"dependsOn": []
+		}
+	]
+}

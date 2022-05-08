@@ -1,0 +1,75 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"value": "aaslab"
+		},
+		"AzureBlobStorage1_connectionString": {
+			"value": ""
+		},
+		"AzureSqlDatabase1_connectionString": {
+			"value": ""
+		},
+		"SqlServer1_connectionString": {
+			"value": ""
+		},
+		"aaslab_azure_sql_connectionString": {
+			"value": ""
+		},
+		"aaslab_databricks_password": {
+			"value": ""
+		},
+		"aaslab_deltalake_accessToken": {
+			"value": ""
+		},
+		"aasmysql_connectionString": {
+			"value": ""
+		},
+		"aasstorage_accountKey": {
+			"value": ""
+		},
+		"adf_repo_connectionString": {
+			"value": ""
+		},
+		"az_databricks_password": {
+			"value": ""
+		},
+		"blobtemplate_connectionString": {
+			"value": ""
+		},
+		"nanbintoken_accessToken": {
+			"value": ""
+		},
+		"nonspark_accessToken": {
+			"value": ""
+		},
+		"aaslab_databricks_properties_typeProperties_host": {
+			"value": "adb-703617936550726.2.databricks.azure.cn"
+		},
+		"aaslab_databricks_properties_typeProperties_username": {
+			"value": "token"
+		},
+		"aaslab_keyvault_properties_typeProperties_baseUrl": {
+			"value": "https://aaslab.vault.azure.cn/"
+		},
+		"aasstorage_properties_typeProperties_url": {
+			"value": "https://aasstorage.dfs.core.chinacloudapi.cn"
+		},
+		"az_databricks_properties_typeProperties_host": {
+			"value": "adb-6762076916997835.3.databricks.azure.cn"
+		},
+		"az_databricks_properties_typeProperties_username": {
+			"value": "token"
+		},
+		"rest_get_weather_properties_typeProperties_url": {
+			"value": "https://api.seniverse.com/v3/weather/now.json?key=ScB4EUZrAvDaocug3&location=shanghai&language=zh-Hans&unit=c"
+		},
+		"containerUri": {
+			"value": ""
+		},
+		"containerSasToken": {
+			"value": ""
+		}
+	}
+}
