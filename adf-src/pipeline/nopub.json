@@ -1,0 +1,30 @@
+{
+	"name": "nopub",
+	"properties": {
+		"activities": [
+			{
+				"name": "Notebook1",
+				"type": "DatabricksNotebook",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"notebookPath": "/Users/needn@yzdazure.partner.onmschina.cn/ACL_demo"
+				},
+				"linkedServiceName": {
+					"referenceName": "msi_acl_cluster",
+					"type": "LinkedServiceReference"
+				}
+			}
+		],
+		"annotations": [],
+		"lastPublishTime": "2022-05-02T12:52:46Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

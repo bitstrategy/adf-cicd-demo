@@ -1,0 +1,21 @@
+{
+	"name": "job_list_parquet",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "aasstorage",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Parquet",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"folderPath": "job_list",
+				"fileSystem": "inbound"
+			},
+			"compressionCodec": "snappy"
+		},
+		"schema": []
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

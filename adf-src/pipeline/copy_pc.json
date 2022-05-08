@@ -1,0 +1,937 @@
+{
+	"name": "copy_pc",
+	"properties": {
+		"activities": [
+			{
+				"name": "Copy data2",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "DelimitedTextSource",
+						"storeSettings": {
+							"type": "AzureBlobFSReadSettings",
+							"recursive": true,
+							"enablePartitionDiscovery": false
+						},
+						"formatSettings": {
+							"type": "DelimitedTextReadSettings"
+						}
+					},
+					"sink": {
+						"type": "AzureMySqlSink",
+						"writeBatchSize": 10000,
+						"writeBatchTimeout": "00:00:30"
+					},
+					"enableStaging": false,
+					"enableSkipIncompatibleRow": true,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "pk",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "pk",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "market",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "market",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "city",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "city",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "brand",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "brand",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "res_name",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "res_name",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "res_code",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "res_code",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "apply_type",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "apply_type",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "res_type",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "res_type",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "biz_model",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "biz_model",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "desgin_model",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "desgin_model",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "is_jiameng",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "is_jiameng",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "modify_range",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "modify_range",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "floor",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "floor",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "is_jiaceng",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "is_jiaceng",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "actual_seat",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "actual_seat",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "actual_area",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "actual_area",
+									"type": "Decimal"
+								}
+							},
+							{
+								"source": {
+									"name": "k_area",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "k_area",
+									"type": "Decimal"
+								}
+							},
+							{
+								"source": {
+									"name": "c_area",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "c_area",
+									"type": "Decimal"
+								}
+							},
+							{
+								"source": {
+									"name": "start_date",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "start_date",
+									"type": "DateTime"
+								}
+							},
+							{
+								"source": {
+									"name": "complete_date",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "complete_date",
+									"type": "DateTime"
+								}
+							},
+							{
+								"source": {
+									"name": "open_date",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "open_date",
+									"type": "DateTime"
+								}
+							},
+							{
+								"source": {
+									"name": "close_date",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "close_date",
+									"type": "DateTime"
+								}
+							},
+							{
+								"source": {
+									"name": "commit_date",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "commit_date",
+									"type": "DateTime"
+								}
+							},
+							{
+								"source": {
+									"name": "design_company",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "design_company",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "imp_company",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "imp_company",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "pe",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "pe",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "pms",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "pms",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "qs",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "qs",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "qss",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "qss",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "change_order_status",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "change_order_status",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "change_type",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "change_type",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "chagne_part",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "chagne_part",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "plan_date",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "plan_date",
+									"type": "DateTime"
+								}
+							},
+							{
+								"source": {
+									"name": "change_desc",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "change_desc",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "sub_item",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "sub_item",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "change_reason",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "change_reason",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "change_reason2",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "change_reason2",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "pe_inc_desc",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "pe_inc_desc",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "pe_de_desc",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "pe_de_desc",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "pe_direct_fee",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "pe_direct_fee",
+									"type": "Decimal"
+								}
+							},
+							{
+								"source": {
+									"name": "com_inc_desc",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "com_inc_desc",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "com_de_desc",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "com_de_desc",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "com_direct_fee",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "com_direct_fee",
+									"type": "Decimal"
+								}
+							},
+							{
+								"source": {
+									"name": "qs_inc_desc",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "qs_inc_desc",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "qs_de_desc",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "qs_de_desc",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "qs_direct_fee",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "qs_direct_fee",
+									"type": "Decimal"
+								}
+							},
+							{
+								"source": {
+									"name": "order_status2",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "order_status2",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "plan_change_fee",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "plan_change_fee",
+									"type": "Decimal"
+								}
+							},
+							{
+								"source": {
+									"name": "qs_fee",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "qs_fee",
+									"type": "Decimal"
+								}
+							},
+							{
+								"source": {
+									"name": "qss_fee",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "qss_fee",
+									"type": "Decimal"
+								}
+							},
+							{
+								"source": {
+									"name": "pj_commit_date",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "pj_commit_date",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "pj_pms_date",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "pj_pms_date",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "pj_cm_date",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "pj_cm_date",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "pj_pe_date",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "pj_pe_date",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "pj_pms_date2",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "pj_pms_date2",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "pj_cm_date2",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "pj_cm_date2",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "js_com_commit_date",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "js_com_commit_date",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "js_pe_date",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "js_pe_date",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "js_pms_date",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "js_pms_date",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "bj_change_date",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "bj_change_date",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "bj_qs_date",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "bj_qs_date",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "bj_qss_date",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "bj_qss_date",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "js2_com_date",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "js2_com_date",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "js2_pe_date",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "js2_pe_date",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "js2_pms_date",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "js2_pms_date",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "jsb_commit_date",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "jsb_commit_date",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "jsb_qs_date",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "jsb_qs_date",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "jsb_qss_date",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "jsb_qss_date",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "project_timely",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "project_timely",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "pe_reject_no",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "pe_reject_no",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "pe_reject_reason",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "pe_reject_reason",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "pm_reject_no",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "pm_reject_no",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "pms_reject_reason",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "pms_reject_reason",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "qs_reject_no",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "qs_reject_no",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "qs_reject_reason",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "qs_reject_reason",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "qss_reject_no",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "qss_reject_no",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "qss_reject_reason",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "qss_reject_reason",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "cm_reject_no",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "cm_reject_no",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "cm_reject_reason",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "cm_reject_reason",
+									"type": "String"
+								}
+							}
+						],
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "csv_pc",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "sql_pc",
+						"type": "DatasetReference"
+					}
+				]
+			}
+		],
+		"folder": {
+			"name": "workspace"
+		},
+		"annotations": [],
+		"lastPublishTime": "2022-02-15T08:14:53Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

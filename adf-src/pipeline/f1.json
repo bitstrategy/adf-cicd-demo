@@ -1,0 +1,23 @@
+{
+	"name": "f1",
+	"properties": {
+		"activities": [
+			{
+				"name": "Fail1",
+				"type": "Fail",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"message": "Not Found",
+					"errorCode": "404"
+				}
+			}
+		],
+		"folder": {
+			"name": "demo"
+		},
+		"annotations": [],
+		"lastPublishTime": "2022-04-20T04:52:51Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

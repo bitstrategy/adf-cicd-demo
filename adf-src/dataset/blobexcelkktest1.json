@@ -1,0 +1,48 @@
+{
+	"name": "blobexcelkktest1",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureBlobStorage1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Excel",
+		"typeProperties": {
+			"sheetName": "层级对照表",
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "test111.xlsx",
+				"folderPath": "kktest2",
+				"container": "inbound"
+			},
+			"firstRowAsHeader": true
+		},
+		"schema": [
+			{
+				"type": "String"
+			},
+			{
+				"type": "String"
+			},
+			{
+				"type": "String"
+			},
+			{
+				"type": "String"
+			},
+			{
+				"type": "String"
+			},
+			{
+				"type": "String"
+			},
+			{
+				"type": "String"
+			},
+			{
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

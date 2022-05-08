@@ -1,0 +1,25 @@
+{
+	"name": "msi_job",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "AzureDatabricks",
+		"typeProperties": {
+			"domain": "https://adb-703617936550726.2.databricks.azure.cn",
+			"authentication": "MSI",
+			"workspaceResourceId": "/subscriptions/b576cca1-1304-45fb-9d2c-092dd6783357/resourceGroups/aaslab/providers/Microsoft.Databricks/workspaces/aas_databricks",
+			"credential": {
+				"referenceName": "adbmi_cre",
+				"type": "CredentialReference"
+			},
+			"instancePoolId": "0502-015605-wells3-pool-hi9ye0m5",
+			"newClusterNumOfWorker": "1",
+			"newClusterSparkEnvVars": {
+				"PYSPARK_PYTHON": "/databricks/python3/bin/python3"
+			},
+			"newClusterVersion": "10.4.x-scala2.12",
+			"newClusterInitScripts": [],
+			"clusterOption": "Fixed"
+		}
+	}
+}

@@ -1,0 +1,18 @@
+{
+	"name": "msi_acl_cluster",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "AzureDatabricks",
+		"typeProperties": {
+			"domain": "https://adb-703617936550726.2.databricks.azure.cn",
+			"authentication": "MSI",
+			"workspaceResourceId": "/subscriptions/b576cca1-1304-45fb-9d2c-092dd6783357/resourceGroups/aaslab/providers/Microsoft.Databricks/workspaces/aas_databricks",
+			"credential": {
+				"referenceName": "adbmi_cre",
+				"type": "CredentialReference"
+			},
+			"existingClusterId": "0502-023914-rypf5z2r"
+		}
+	}
+}

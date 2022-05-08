@@ -1,0 +1,50 @@
+{
+	"name": "adb1",
+	"properties": {
+		"activities": [
+			{
+				"name": "Run n1",
+				"type": "DatabricksNotebook",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"notebookPath": "/Users/needn@yzdazure.partner.onmschina.cn/Jobs/n1"
+				},
+				"linkedServiceName": {
+					"referenceName": "msi_job",
+					"type": "LinkedServiceReference"
+				}
+			},
+			{
+				"name": "Run n2",
+				"type": "DatabricksNotebook",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 2,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"notebookPath": "/Users/needn@yzdazure.partner.onmschina.cn/Jobs/n2"
+				},
+				"linkedServiceName": {
+					"referenceName": "msi_job",
+					"type": "LinkedServiceReference"
+				}
+			}
+		],
+		"annotations": [],
+		"lastPublishTime": "2022-05-07T09:30:46Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

@@ -1,0 +1,15 @@
+{
+	"name": "aaslab",
+	"location": "chinaeast2",
+	"identity": {
+		"type": "SystemAssigned,UserAssigned",
+		"principalId": "75fa1599-9a31-45e7-8157-e59873d79984",
+		"tenantId": "32431aa7-3300-4bd6-b7ee-1edcc92818b6",
+		"userAssignedIdentities": {
+			"/subscriptions/b576cca1-1304-45fb-9d2c-092dd6783357/resourcegroups/aaslab/providers/Microsoft.ManagedIdentity/userAssignedIdentities/adbmi": {
+				"clientId": "b87505e5-bafb-43f8-bb75-383070688eba",
+				"principalId": "4810e57c-cc11-4198-8268-9bb5dbe36721"
+			}
+		}
+	}
+}

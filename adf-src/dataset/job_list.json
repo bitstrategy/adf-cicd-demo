@@ -1,0 +1,44 @@
+{
+	"name": "job_list",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "adf_repo",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "JOB",
+				"type": "nvarchar"
+			},
+			{
+				"name": "PARENT_JOB",
+				"type": "nvarchar"
+			},
+			{
+				"name": "FAILED_RUN",
+				"type": "char"
+			},
+			{
+				"name": "IS_TIME_SCHEDULED",
+				"type": "char"
+			},
+			{
+				"name": "START_HOUR",
+				"type": "tinyint",
+				"precision": 3
+			},
+			{
+				"name": "START_MINUTE",
+				"type": "tinyint",
+				"precision": 3
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "job_list"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

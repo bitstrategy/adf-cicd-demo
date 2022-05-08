@@ -1,0 +1,23 @@
+{
+	"name": "f2",
+	"properties": {
+		"activities": [
+			{
+				"name": "Fail1",
+				"type": "Fail",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"message": "Divide Zero",
+					"errorCode": "406"
+				}
+			}
+		],
+		"folder": {
+			"name": "demo"
+		},
+		"annotations": [],
+		"lastPublishTime": "2022-04-20T04:53:26Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

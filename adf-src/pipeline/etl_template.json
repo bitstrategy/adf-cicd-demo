@@ -1,0 +1,262 @@
+{
+	"name": "etl_template",
+	"properties": {
+		"activities": [
+			{
+				"name": "ETL Started",
+				"type": "SqlServerStoredProcedure",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"storedProcedureName": "[dbo].[USP_ETL_LOG]",
+					"storedProcedureParameters": {
+						"ERROR_MESSAGE": {
+							"value": null,
+							"type": "String"
+						},
+						"ETL_LAYER": {
+							"value": "ODS",
+							"type": "String"
+						},
+						"ETL_PIPELINE_NAME": {
+							"value": {
+								"value": "@pipeline().Pipeline",
+								"type": "Expression"
+							},
+							"type": "String"
+						},
+						"ETL_RUN_ID": {
+							"value": {
+								"value": "@pipeline().RunId",
+								"type": "Expression"
+							},
+							"type": "String"
+						},
+						"LOG_STATUS": {
+							"value": "S",
+							"type": "String"
+						},
+						"ETL_ARG": {
+							"value": {
+								"value": "@pipeline().parameters.DS_TEMPLATE_NAME",
+								"type": "Expression"
+							},
+							"type": "String"
+						}
+					}
+				},
+				"linkedServiceName": {
+					"referenceName": "aaslab_azure_sql",
+					"type": "LinkedServiceReference"
+				}
+			},
+			{
+				"name": "Data processing",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "ETL Started",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "excel_to_azure_sql",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true,
+					"parameters": {
+						"DS_TEMPLATE_NAME": {
+							"value": "@pipeline().parameters.DS_TEMPLATE_NAME",
+							"type": "Expression"
+						}
+					}
+				}
+			},
+			{
+				"name": "Data processing failed",
+				"type": "Fail",
+				"dependsOn": [
+					{
+						"activity": "Data processing",
+						"dependencyConditions": [
+							"Failed"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"message": {
+						"value": "@activity('Data processing').output.errors[0].Message",
+						"type": "Expression"
+					},
+					"errorCode": "10086"
+				}
+			},
+			{
+				"name": "ETL Succeeded",
+				"type": "SqlServerStoredProcedure",
+				"dependsOn": [
+					{
+						"activity": "Data processing",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"storedProcedureName": "[dbo].[USP_ETL_LOG]",
+					"storedProcedureParameters": {
+						"ERROR_MESSAGE": {
+							"value": null,
+							"type": "String"
+						},
+						"ETL_LAYER": {
+							"value": null,
+							"type": "String"
+						},
+						"ETL_PIPELINE_NAME": {
+							"value": null,
+							"type": "String"
+						},
+						"ETL_RUN_ID": {
+							"value": {
+								"value": "@pipeline().RunId",
+								"type": "Expression"
+							},
+							"type": "String"
+						},
+						"LOG_STATUS": {
+							"value": "C",
+							"type": "String"
+						},
+						"ETL_ARG": {
+							"value": null,
+							"type": "String"
+						}
+					}
+				},
+				"linkedServiceName": {
+					"referenceName": "aaslab_azure_sql",
+					"type": "LinkedServiceReference"
+				}
+			},
+			{
+				"name": "ETL Failed",
+				"type": "SqlServerStoredProcedure",
+				"dependsOn": [
+					{
+						"activity": "Data processing failed",
+						"dependencyConditions": [
+							"Failed"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"storedProcedureName": "[dbo].[USP_ETL_LOG]",
+					"storedProcedureParameters": {
+						"ERROR_MESSAGE": {
+							"value": {
+								"value": "@{activity('Data processing failed').output.errorCode}: @{activity('Data processing failed').output.message}",
+								"type": "Expression"
+							},
+							"type": "String"
+						},
+						"ETL_LAYER": {
+							"value": null,
+							"type": "String"
+						},
+						"ETL_PIPELINE_NAME": {
+							"value": null,
+							"type": "String"
+						},
+						"ETL_RUN_ID": {
+							"value": {
+								"value": "@pipeline().RunId",
+								"type": "Expression"
+							},
+							"type": "String"
+						},
+						"LOG_STATUS": {
+							"value": "F",
+							"type": "String"
+						},
+						"ETL_ARG": {
+							"value": null,
+							"type": "String"
+						}
+					}
+				},
+				"linkedServiceName": {
+					"referenceName": "aaslab_azure_sql",
+					"type": "LinkedServiceReference"
+				}
+			},
+			{
+				"name": "Mail notification",
+				"type": "WebActivity",
+				"dependsOn": [
+					{
+						"activity": "ETL Failed",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"url": "https://prod-23.chinaeast2.logic.azure.cn:443/workflows/8acc34e34cb54f5f8a484ea6af352095/triggers/manual/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=9PlTrGGfOl9H_97IIisR4b7kHPjIxaO33IBbsjyTbgc",
+					"method": "POST",
+					"body": {
+						"value": "{\n    \"message\" : \"@{activity('Data processing failed').output.errorCode}: @{activity('Data processing failed').output.message}\",\n    \"dataFactoryName\" : \"@{pipeline().DataFactory}\", \n    \"pipelineName\" : \"@{pipeline().Pipeline}\"\n   \n   }",
+						"type": "Expression"
+					}
+				}
+			}
+		],
+		"parameters": {
+			"DS_TEMPLATE_NAME": {
+				"type": "string"
+			}
+		},
+		"folder": {
+			"name": "control_flow"
+		},
+		"annotations": [],
+		"lastPublishTime": "2022-03-15T04:44:58Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

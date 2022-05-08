@@ -1,0 +1,85 @@
+{
+	"name": "spark_to_adls_gen2",
+	"properties": {
+		"activities": [
+			{
+				"name": "Copy data1",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "SparkSource"
+					},
+					"sink": {
+						"type": "DelimitedTextSink",
+						"storeSettings": {
+							"type": "AzureBlobFSWriteSettings"
+						},
+						"formatSettings": {
+							"type": "DelimitedTextWriteSettings",
+							"quoteAllText": true,
+							"fileExtension": ".csv"
+						}
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "az_databricks",
+						"type": "DatasetReference",
+						"parameters": {
+							"table_name": {
+								"value": "@pipeline().parameters.table_name",
+								"type": "Expression"
+							}
+						}
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "delta_stg",
+						"type": "DatasetReference",
+						"parameters": {
+							"folder_name": {
+								"value": "@pipeline().parameters.table_name",
+								"type": "Expression"
+							},
+							"file_name": {
+								"value": "@concat( pipeline().parameters.table_name, '.csv')",
+								"type": "Expression"
+							}
+						}
+					}
+				]
+			}
+		],
+		"parameters": {
+			"table_name": {
+				"type": "string",
+				"defaultValue": "dm_td_ins"
+			}
+		},
+		"folder": {
+			"name": "copy_activity"
+		},
+		"annotations": [],
+		"lastPublishTime": "2021-06-29T02:45:48Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

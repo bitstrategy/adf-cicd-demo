@@ -1,0 +1,165 @@
+{
+	"name": "Dependency",
+	"properties": {
+		"activities": [
+			{
+				"name": "s1",
+				"type": "ExecutePipeline",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "s1",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "s2",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "s1",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "s2",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "s3",
+				"type": "ExecutePipeline",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "s3",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "f1",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "s2",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					},
+					{
+						"activity": "s3",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "f1",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "s4",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "f1",
+						"dependencyConditions": [
+							"Completed"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "s4",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "f2",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "f1",
+						"dependencyConditions": [
+							"Failed"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "f2",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "s5",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "f1",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "s4",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "s6",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "s5",
+						"dependencyConditions": [
+							"Skipped"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "s4",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			}
+		],
+		"folder": {
+			"name": "control_flow"
+		},
+		"annotations": [],
+		"lastPublishTime": "2022-05-07T05:01:36Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

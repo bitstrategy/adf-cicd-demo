@@ -1,0 +1,38 @@
+{
+	"name": "AzureSqlTable_kktest3",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureSqlDatabase1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "Lev2",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Lev3",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Lev4",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Lev5",
+				"type": "nvarchar"
+			},
+			{
+				"name": "file_source",
+				"type": "nvarchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "S_kaikaitest3"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

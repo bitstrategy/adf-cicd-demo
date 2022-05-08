@@ -1,0 +1,157 @@
+{
+	"name": "avro_to_adls_gen2",
+	"properties": {
+		"activities": [
+			{
+				"name": "Copy data1",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "AvroSource",
+						"storeSettings": {
+							"type": "AzureBlobFSReadSettings",
+							"recursive": true,
+							"wildcardFolderPath": "*",
+							"wildcardFileName": "*.avro",
+							"enablePartitionDiscovery": false
+						}
+					},
+					"sink": {
+						"type": "DelimitedTextSink",
+						"storeSettings": {
+							"type": "AzureBlobFSWriteSettings",
+							"copyBehavior": "MergeFiles"
+						},
+						"formatSettings": {
+							"type": "DelimitedTextWriteSettings",
+							"quoteAllText": true,
+							"fileExtension": ".txt"
+						}
+					},
+					"enableStaging": false,
+					"validateDataConsistency": true,
+					"logSettings": {
+						"enableCopyActivityLog": true,
+						"copyActivityLogSettings": {
+							"logLevel": "Warning",
+							"enableReliableLogging": false
+						},
+						"logLocationSettings": {
+							"linkedServiceName": {
+								"referenceName": "aasstorage",
+								"type": "LinkedServiceReference"
+							},
+							"path": "aasbase/log"
+						}
+					},
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "SequenceNumber",
+									"type": "Int64",
+									"physicalType": "long"
+								},
+								"sink": {
+									"name": "SequenceNumber",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Offset",
+									"type": "String",
+									"physicalType": "string"
+								},
+								"sink": {
+									"name": "Offset",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "EnqueuedTimeUtc",
+									"type": "String",
+									"physicalType": "string"
+								},
+								"sink": {
+									"name": "EnqueuedTimeUtc",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "SystemProperties",
+									"physicalType": "map"
+								},
+								"sink": {
+									"name": "SystemProperties",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Properties",
+									"physicalType": "map"
+								},
+								"sink": {
+									"name": "Properties",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Body",
+									"physicalType": "null | bytes"
+								},
+								"sink": {
+									"name": "Body",
+									"type": "String",
+									"physicalType": "String"
+								}
+							}
+						],
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "avro_demo",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "sys_tables_csv",
+						"type": "DatasetReference"
+					}
+				]
+			}
+		],
+		"folder": {
+			"name": "copy_activity"
+		},
+		"annotations": [],
+		"lastPublishTime": "2021-08-12T14:13:00Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

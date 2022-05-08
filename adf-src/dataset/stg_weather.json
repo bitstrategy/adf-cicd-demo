@@ -1,0 +1,73 @@
+{
+	"name": "stg_weather",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "aasstorage",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Json",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "shanghai.json",
+				"folderPath": "bronze/weather",
+				"fileSystem": "aasbase"
+			}
+		},
+		"schema": {
+			"type": "object",
+			"properties": {
+				"results": {
+					"type": "array",
+					"items": {
+						"type": "object",
+						"properties": {
+							"location": {
+								"type": "object",
+								"properties": {
+									"id": {
+										"type": "string"
+									},
+									"name": {
+										"type": "string"
+									},
+									"country": {
+										"type": "string"
+									},
+									"path": {
+										"type": "string"
+									},
+									"timezone": {
+										"type": "string"
+									},
+									"timezone_offset": {
+										"type": "string"
+									}
+								}
+							},
+							"now": {
+								"type": "object",
+								"properties": {
+									"text": {
+										"type": "string"
+									},
+									"code": {
+										"type": "string"
+									},
+									"temperature": {
+										"type": "string"
+									}
+								}
+							},
+							"last_update": {
+								"type": "string"
+							}
+						}
+					}
+				}
+			}
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

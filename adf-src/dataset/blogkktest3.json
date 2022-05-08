@@ -1,0 +1,40 @@
+{
+	"name": "blogkktest3",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureBlobStorage1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Excel",
+		"typeProperties": {
+			"sheetName": "LFG报表自定义的",
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "test2.xlsx",
+				"folderPath": "kktest2",
+				"container": "inbound"
+			},
+			"firstRowAsHeader": true
+		},
+		"schema": [
+			{
+				"name": "lev2",
+				"type": "String"
+			},
+			{
+				"name": "lev3",
+				"type": "String"
+			},
+			{
+				"name": "lev4",
+				"type": "String"
+			},
+			{
+				"name": "lev5",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

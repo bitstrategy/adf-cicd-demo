@@ -1,0 +1,62 @@
+{
+	"name": "s2",
+	"properties": {
+		"activities": [
+			{
+				"name": "Wait1",
+				"type": "Wait",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"waitTimeInSeconds": 1
+				}
+			},
+			{
+				"name": "ForEach1",
+				"type": "ForEach",
+				"dependsOn": [
+					{
+						"activity": "Wait1",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"items": {
+						"value": "@range(1, 3)",
+						"type": "Expression"
+					},
+					"batchCount": 3,
+					"activities": [
+						{
+							"name": "Set variable1",
+							"type": "SetVariable",
+							"dependsOn": [],
+							"userProperties": [],
+							"typeProperties": {
+								"variableName": "v1",
+								"value": {
+									"value": "@item()",
+									"type": "Expression"
+								}
+							}
+						}
+					]
+				}
+			}
+		],
+		"variables": {
+			"v1": {
+				"type": "String"
+			}
+		},
+		"folder": {
+			"name": "demo"
+		},
+		"annotations": [],
+		"lastPublishTime": "2022-05-07T05:01:35Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

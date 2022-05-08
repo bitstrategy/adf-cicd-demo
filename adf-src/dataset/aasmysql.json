@@ -1,0 +1,16 @@
+{
+	"name": "aasmysql",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "aasmysql",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureMySqlTable",
+		"schema": [],
+		"typeProperties": {
+			"tableName": "`se`"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

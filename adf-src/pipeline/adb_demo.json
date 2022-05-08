@@ -1,0 +1,38 @@
+{
+	"name": "adb_demo",
+	"properties": {
+		"activities": [
+			{
+				"name": "Notebook1",
+				"type": "DatabricksNotebook",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"notebookPath": "/Users/needn@yzdazure.partner.onmschina.cn/AZ/env_setup",
+					"libraries": [
+						{
+							"whl": ""
+						}
+					]
+				},
+				"linkedServiceName": {
+					"referenceName": "aas_adb",
+					"type": "LinkedServiceReference"
+				}
+			}
+		],
+		"folder": {
+			"name": "control_flow"
+		},
+		"annotations": [],
+		"lastPublishTime": "2021-06-19T12:51:48Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

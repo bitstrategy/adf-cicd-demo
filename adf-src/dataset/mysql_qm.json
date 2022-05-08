@@ -1,0 +1,16 @@
+{
+	"name": "mysql_qm",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "aasmysql",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureMySqlTable",
+		"schema": [],
+		"typeProperties": {
+			"tableName": "`qm`"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

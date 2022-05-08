@@ -1,0 +1,33 @@
+{
+	"name": "archive",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "aasstorage",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"CONTAINER_NAME": {
+				"type": "string"
+			},
+			"FOLDER_NAME": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"type": "Binary",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"folderPath": {
+					"value": "@dataset().FOLDER_NAME",
+					"type": "Expression"
+				},
+				"fileSystem": {
+					"value": "@dataset().CONTAINER_NAME",
+					"type": "Expression"
+				}
+			}
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

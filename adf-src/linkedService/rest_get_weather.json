@@ -1,0 +1,13 @@
+{
+	"name": "rest_get_weather",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "HttpServer",
+		"typeProperties": {
+			"url": "https://api.seniverse.com/v3/weather/now.json?key=ScB4EUZrAvDaocug3&location=shanghai&language=zh-Hans&unit=c",
+			"enableServerCertificateValidation": true,
+			"authenticationType": "Anonymous"
+		}
+	}
+}

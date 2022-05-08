@@ -1,0 +1,28 @@
+{
+	"name": "error_handling",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "azuresql_dummy",
+						"type": "DatasetReference"
+					},
+					"name": "source1"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "azuresql_t2",
+						"type": "DatasetReference"
+					},
+					"name": "sink1"
+				}
+			],
+			"transformations": [],
+			"script": "source(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tisolationLevel: 'READ_UNCOMMITTED',\n\tquery: 'SELECT * FROM mio.T1',\n\tformat: 'query') ~> source1\nsource1 sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tdeletable:false,\n\tinsertable:true,\n\tupdateable:false,\n\tupsertable:false,\n\ttruncate:true,\n\tformat: 'table',\n\terrorHandlingOption: 'allErrors',\n\ttransactionCommit: 'single',\n\treportSuccessOnError: false) ~> sink1"
+		}
+	}
+}

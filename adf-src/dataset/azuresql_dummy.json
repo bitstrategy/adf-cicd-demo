@@ -1,0 +1,28 @@
+{
+	"name": "azuresql_dummy",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "aaslab_azure_sql",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"TABLE_NAME": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": {
+				"value": "mio",
+				"type": "Expression"
+			},
+			"table": {
+				"value": "@dataset().TABLE_NAME",
+				"type": "Expression"
+			}
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

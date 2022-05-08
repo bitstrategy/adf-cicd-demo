@@ -1,0 +1,22 @@
+{
+	"name": "s4",
+	"properties": {
+		"activities": [
+			{
+				"name": "Wait1",
+				"type": "Wait",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"waitTimeInSeconds": 1
+				}
+			}
+		],
+		"folder": {
+			"name": "demo"
+		},
+		"annotations": [],
+		"lastPublishTime": "2022-04-20T04:51:53Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

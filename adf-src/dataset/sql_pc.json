@@ -1,0 +1,412 @@
+{
+	"name": "sql_pc",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "aasmysql",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureMySqlTable",
+		"schema": [
+			{
+				"name": "pk",
+				"precision": 10,
+				"scale": 0
+			},
+			{
+				"name": "market",
+				"precision": 100,
+				"scale": 0
+			},
+			{
+				"name": "city",
+				"precision": 100,
+				"scale": 0
+			},
+			{
+				"name": "brand",
+				"precision": 100,
+				"scale": 0
+			},
+			{
+				"name": "res_name",
+				"precision": 100,
+				"scale": 0
+			},
+			{
+				"name": "res_code",
+				"precision": 100,
+				"scale": 0
+			},
+			{
+				"name": "apply_type",
+				"precision": 100,
+				"scale": 0
+			},
+			{
+				"name": "res_type",
+				"precision": 100,
+				"scale": 0
+			},
+			{
+				"name": "biz_model",
+				"precision": 100,
+				"scale": 0
+			},
+			{
+				"name": "desgin_model",
+				"precision": 100,
+				"scale": 0
+			},
+			{
+				"name": "is_jiameng",
+				"precision": 100,
+				"scale": 0
+			},
+			{
+				"name": "modify_range",
+				"precision": 100,
+				"scale": 0
+			},
+			{
+				"name": "floor",
+				"precision": 100,
+				"scale": 0
+			},
+			{
+				"name": "is_jiaceng",
+				"precision": 100,
+				"scale": 0
+			},
+			{
+				"name": "actual_seat",
+				"precision": 10,
+				"scale": 0
+			},
+			{
+				"name": "actual_area",
+				"precision": 18,
+				"scale": 4
+			},
+			{
+				"name": "k_area",
+				"precision": 18,
+				"scale": 4
+			},
+			{
+				"name": "c_area",
+				"precision": 18,
+				"scale": 4
+			},
+			{
+				"name": "start_date",
+				"precision": 19,
+				"scale": 0
+			},
+			{
+				"name": "complete_date",
+				"precision": 19,
+				"scale": 0
+			},
+			{
+				"name": "open_date",
+				"precision": 19,
+				"scale": 0
+			},
+			{
+				"name": "close_date",
+				"precision": 19,
+				"scale": 0
+			},
+			{
+				"name": "commit_date",
+				"precision": 19,
+				"scale": 0
+			},
+			{
+				"name": "design_company",
+				"precision": 100,
+				"scale": 0
+			},
+			{
+				"name": "imp_company",
+				"precision": 100,
+				"scale": 0
+			},
+			{
+				"name": "pe",
+				"precision": 100,
+				"scale": 0
+			},
+			{
+				"name": "pms",
+				"precision": 100,
+				"scale": 0
+			},
+			{
+				"name": "qs",
+				"precision": 100,
+				"scale": 0
+			},
+			{
+				"name": "qss",
+				"precision": 100,
+				"scale": 0
+			},
+			{
+				"name": "change_order_status",
+				"precision": 100,
+				"scale": 0
+			},
+			{
+				"name": "change_type",
+				"precision": 100,
+				"scale": 0
+			},
+			{
+				"name": "chagne_part",
+				"precision": 100,
+				"scale": 0
+			},
+			{
+				"name": "plan_date",
+				"precision": 19,
+				"scale": 0
+			},
+			{
+				"name": "change_desc",
+				"precision": 232,
+				"scale": 0
+			},
+			{
+				"name": "sub_item",
+				"precision": 100,
+				"scale": 0
+			},
+			{
+				"name": "change_reason",
+				"precision": 232,
+				"scale": 0
+			},
+			{
+				"name": "change_reason2",
+				"precision": 232,
+				"scale": 0
+			},
+			{
+				"name": "pe_inc_desc",
+				"precision": 100,
+				"scale": 0
+			},
+			{
+				"name": "pe_de_desc",
+				"precision": 100,
+				"scale": 0
+			},
+			{
+				"name": "pe_direct_fee",
+				"precision": 18,
+				"scale": 4
+			},
+			{
+				"name": "com_inc_desc",
+				"precision": 100,
+				"scale": 0
+			},
+			{
+				"name": "com_de_desc",
+				"precision": 100,
+				"scale": 0
+			},
+			{
+				"name": "com_direct_fee",
+				"precision": 18,
+				"scale": 4
+			},
+			{
+				"name": "qs_inc_desc",
+				"precision": 100,
+				"scale": 0
+			},
+			{
+				"name": "qs_de_desc",
+				"precision": 100,
+				"scale": 0
+			},
+			{
+				"name": "qs_direct_fee",
+				"precision": 18,
+				"scale": 4
+			},
+			{
+				"name": "order_status2",
+				"precision": 100,
+				"scale": 0
+			},
+			{
+				"name": "plan_change_fee",
+				"precision": 18,
+				"scale": 4
+			},
+			{
+				"name": "qs_fee",
+				"precision": 18,
+				"scale": 4
+			},
+			{
+				"name": "qss_fee",
+				"precision": 18,
+				"scale": 4
+			},
+			{
+				"name": "pj_commit_date",
+				"precision": 100,
+				"scale": 0
+			},
+			{
+				"name": "pj_pms_date",
+				"precision": 100,
+				"scale": 0
+			},
+			{
+				"name": "pj_cm_date",
+				"precision": 100,
+				"scale": 0
+			},
+			{
+				"name": "pj_pe_date",
+				"precision": 100,
+				"scale": 0
+			},
+			{
+				"name": "pj_pms_date2",
+				"precision": 100,
+				"scale": 0
+			},
+			{
+				"name": "pj_cm_date2",
+				"precision": 100,
+				"scale": 0
+			},
+			{
+				"name": "js_com_commit_date",
+				"precision": 100,
+				"scale": 0
+			},
+			{
+				"name": "js_pe_date",
+				"precision": 100,
+				"scale": 0
+			},
+			{
+				"name": "js_pms_date",
+				"precision": 100,
+				"scale": 0
+			},
+			{
+				"name": "bj_change_date",
+				"precision": 100,
+				"scale": 0
+			},
+			{
+				"name": "bj_qs_date",
+				"precision": 100,
+				"scale": 0
+			},
+			{
+				"name": "bj_qss_date",
+				"precision": 100,
+				"scale": 0
+			},
+			{
+				"name": "js2_com_date",
+				"precision": 100,
+				"scale": 0
+			},
+			{
+				"name": "js2_pe_date",
+				"precision": 100,
+				"scale": 0
+			},
+			{
+				"name": "js2_pms_date",
+				"precision": 100,
+				"scale": 0
+			},
+			{
+				"name": "jsb_commit_date",
+				"precision": 100,
+				"scale": 0
+			},
+			{
+				"name": "jsb_qs_date",
+				"precision": 100,
+				"scale": 0
+			},
+			{
+				"name": "jsb_qss_date",
+				"precision": 100,
+				"scale": 0
+			},
+			{
+				"name": "project_timely",
+				"precision": 100,
+				"scale": 0
+			},
+			{
+				"name": "pe_reject_no",
+				"precision": 100,
+				"scale": 0
+			},
+			{
+				"name": "pe_reject_reason",
+				"precision": 100,
+				"scale": 0
+			},
+			{
+				"name": "pm_reject_no",
+				"precision": 100,
+				"scale": 0
+			},
+			{
+				"name": "pms_reject_reason",
+				"precision": 100,
+				"scale": 0
+			},
+			{
+				"name": "qs_reject_no",
+				"precision": 100,
+				"scale": 0
+			},
+			{
+				"name": "qs_reject_reason",
+				"precision": 100,
+				"scale": 0
+			},
+			{
+				"name": "qss_reject_no",
+				"precision": 100,
+				"scale": 0
+			},
+			{
+				"name": "qss_reject_reason",
+				"precision": 100,
+				"scale": 0
+			},
+			{
+				"name": "cm_reject_no",
+				"precision": 100,
+				"scale": 0
+			},
+			{
+				"name": "cm_reject_reason",
+				"precision": 100,
+				"scale": 0
+			}
+		],
+		"typeProperties": {
+			"tableName": "`project_change`"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

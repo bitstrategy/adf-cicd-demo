@@ -1,0 +1,22 @@
+{
+	"name": "template",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "blobtemplate",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Excel",
+		"typeProperties": {
+			"sheetName": "Scenario Data",
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "P&L Datasource Template.xlsx",
+				"container": "data"
+			},
+			"firstRowAsHeader": true
+		},
+		"schema": []
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

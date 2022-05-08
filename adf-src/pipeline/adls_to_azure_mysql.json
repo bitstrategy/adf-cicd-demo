@@ -1,0 +1,452 @@
+{
+	"name": "adls_to_azure_mysql",
+	"properties": {
+		"activities": [
+			{
+				"name": "Copy data1",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "DelimitedTextSource",
+						"storeSettings": {
+							"type": "AzureBlobFSReadSettings",
+							"recursive": true,
+							"enablePartitionDiscovery": false
+						},
+						"formatSettings": {
+							"type": "DelimitedTextReadSettings"
+						}
+					},
+					"sink": {
+						"type": "AzureMySqlSink",
+						"writeBatchSize": 10000,
+						"writeBatchTimeout": "00:00:30"
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "res_name",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "res_name",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "res_code",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "res_code",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "biz_city",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "biz_city",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "brand",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "brand",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "city",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "city",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "apply_type",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "apply_type",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "is_partia",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "is_partia",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "aduit",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "aduit",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "spec",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "spec",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "location",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "location",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "check_date",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "check_date",
+									"type": "DateTime"
+								}
+							},
+							{
+								"source": {
+									"name": "first_commit_date",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "first_commit_date",
+									"type": "DateTime"
+								}
+							},
+							{
+								"source": {
+									"name": "check_person",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "check_person",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "reason",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "reason",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "pe_check",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "pe_check",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "check_photo",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "check_photo",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "status",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "status",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "plan_date",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "plan_date",
+									"type": "DateTime"
+								}
+							},
+							{
+								"source": {
+									"name": "actual_date",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "actual_date",
+									"type": "DateTime"
+								}
+							},
+							{
+								"source": {
+									"name": "change_photo",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "change_photo",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "review_result",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "review_result",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "review_comment",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "review_comment",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "pms_cm",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "pms_cm",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "review_desc",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "review_desc",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "p_level",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "p_level",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "score",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "p_score",
+									"type": "Decimal"
+								}
+							},
+							{
+								"source": {
+									"name": "p_amt",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "p_amt",
+									"type": "Decimal"
+								}
+							},
+							{
+								"source": {
+									"name": "project_director",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "project_director",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "project_engineer",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "project_engineer",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "company_type",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "company_type",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "company_name",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "company_name",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "company_pm",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "company_pm",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "start_date",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "start_date",
+									"type": "DateTime"
+								}
+							},
+							{
+								"source": {
+									"name": "complete_date",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "complete_date",
+									"type": "DateTime"
+								}
+							},
+							{
+								"source": {
+									"name": "open_date",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "open_date",
+									"type": "DateTime"
+								}
+							}
+						],
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "se",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "aasmysql",
+						"type": "DatasetReference"
+					}
+				]
+			}
+		],
+		"folder": {
+			"name": "copy_activity"
+		},
+		"annotations": [],
+		"lastPublishTime": "2021-06-24T11:51:11Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

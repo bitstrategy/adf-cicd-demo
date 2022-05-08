@@ -1,0 +1,21 @@
+{
+	"name": "parquet1",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "aasstorage",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Parquet",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"folderPath": "t1",
+				"fileSystem": "staging"
+			},
+			"compressionCodec": "snappy"
+		},
+		"schema": []
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

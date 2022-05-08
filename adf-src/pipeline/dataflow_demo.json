@@ -1,0 +1,42 @@
+{
+	"name": "dataflow_demo",
+	"properties": {
+		"activities": [
+			{
+				"name": "error_handling",
+				"type": "ExecuteDataFlow",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "1.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"dataflow": {
+						"referenceName": "error_handling",
+						"type": "DataFlowReference",
+						"datasetParameters": {
+							"source1": {
+								"TABLE_NAME": "t2"
+							}
+						}
+					},
+					"compute": {
+						"coreCount": 8,
+						"computeType": "General"
+					},
+					"traceLevel": "Fine"
+				}
+			}
+		],
+		"folder": {
+			"name": "control_flow"
+		},
+		"annotations": [],
+		"lastPublishTime": "2022-02-18T08:48:49Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

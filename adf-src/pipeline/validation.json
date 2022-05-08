@@ -1,0 +1,106 @@
+{
+	"name": "validation",
+	"properties": {
+		"activities": [
+			{
+				"name": "Lookup1",
+				"type": "Lookup",
+				"dependsOn": [
+					{
+						"activity": "Set variable1",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "AzureSqlSource",
+						"sqlReaderQuery": "SELECT V1 FROM mio.T1",
+						"queryTimeout": "02:00:00",
+						"partitionOption": "None"
+					},
+					"dataset": {
+						"referenceName": "azuresql_t2",
+						"type": "DatasetReference"
+					}
+				}
+			},
+			{
+				"name": "If Condition1",
+				"type": "IfCondition",
+				"dependsOn": [
+					{
+						"activity": "Lookup1",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"expression": {
+						"value": "@equals(activity('Lookup1').output.firstRow.V1,'Error' )",
+						"type": "Expression"
+					},
+					"ifTrueActivities": [
+						{
+							"name": "Mail notification",
+							"type": "WebActivity",
+							"dependsOn": [],
+							"policy": {
+								"timeout": "7.00:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"url": "https://prod-23.chinaeast2.logic.azure.cn:443/workflows/8acc34e34cb54f5f8a484ea6af352095/triggers/manual/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=9PlTrGGfOl9H_97IIisR4b7kHPjIxaO33IBbsjyTbgc",
+								"method": "POST",
+								"body": {
+									"value": "{\n    \"message\" : \"Hello\",\n    \"dataFactoryName\" : \"@{pipeline().DataFactory}\", \n    \"pipelineName\" : \"@{pipeline().Pipeline}\"\n\n\n   \n   }",
+									"type": "Expression"
+								}
+							}
+						}
+					]
+				}
+			},
+			{
+				"name": "Set variable1",
+				"type": "SetVariable",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "year_month",
+					"value": {
+						"value": "@formatDateTime(utcNow())",
+						"type": "Expression"
+					}
+				}
+			}
+		],
+		"variables": {
+			"year_month": {
+				"type": "String",
+				"defaultValue": "0"
+			}
+		},
+		"folder": {
+			"name": "control_flow"
+		},
+		"annotations": [],
+		"lastPublishTime": "2022-02-28T07:28:23Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

@@ -1,0 +1,187 @@
+{
+	"name": "qm",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "aasmysql",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureMySqlTable",
+		"schema": [
+			{
+				"name": "res_name",
+				"precision": 100,
+				"scale": 0
+			},
+			{
+				"name": "res_code",
+				"precision": 100,
+				"scale": 0
+			},
+			{
+				"name": "biz_city",
+				"precision": 100,
+				"scale": 0
+			},
+			{
+				"name": "brand",
+				"precision": 100,
+				"scale": 0
+			},
+			{
+				"name": "city",
+				"precision": 100,
+				"scale": 0
+			},
+			{
+				"name": "apply_type",
+				"precision": 100,
+				"scale": 0
+			},
+			{
+				"name": "is_partia",
+				"precision": 100,
+				"scale": 0
+			},
+			{
+				"name": "mgt_mode",
+				"precision": 100,
+				"scale": 0
+			},
+			{
+				"name": "aduit",
+				"precision": 232,
+				"scale": 0
+			},
+			{
+				"name": "spec",
+				"precision": 232,
+				"scale": 0
+			},
+			{
+				"name": "location",
+				"precision": 100,
+				"scale": 0
+			},
+			{
+				"name": "check_date",
+				"precision": 19,
+				"scale": 0
+			},
+			{
+				"name": "first_commit_date",
+				"precision": 19,
+				"scale": 0
+			},
+			{
+				"name": "check_person",
+				"precision": 100,
+				"scale": 0
+			},
+			{
+				"name": "reason",
+				"precision": 232,
+				"scale": 0
+			},
+			{
+				"name": "pe_check",
+				"precision": 100,
+				"scale": 0
+			},
+			{
+				"name": "status",
+				"precision": 100,
+				"scale": 0
+			},
+			{
+				"name": "plan_date",
+				"precision": 19,
+				"scale": 0
+			},
+			{
+				"name": "actual_date",
+				"precision": 19,
+				"scale": 0
+			},
+			{
+				"name": "change_photo",
+				"precision": 100,
+				"scale": 0
+			},
+			{
+				"name": "review_result",
+				"precision": 232,
+				"scale": 0
+			},
+			{
+				"name": "review_comment",
+				"precision": 232,
+				"scale": 0
+			},
+			{
+				"name": "pms_cm",
+				"precision": 100,
+				"scale": 0
+			},
+			{
+				"name": "review_desc",
+				"precision": 232,
+				"scale": 0
+			},
+			{
+				"name": "p_level",
+				"precision": 100,
+				"scale": 0
+			},
+			{
+				"name": "score",
+				"precision": 18,
+				"scale": 4
+			},
+			{
+				"name": "project_director",
+				"precision": 100,
+				"scale": 0
+			},
+			{
+				"name": "project_engineer",
+				"precision": 100,
+				"scale": 0
+			},
+			{
+				"name": "company_type",
+				"precision": 100,
+				"scale": 0
+			},
+			{
+				"name": "company_name",
+				"precision": 100,
+				"scale": 0
+			},
+			{
+				"name": "company_pm",
+				"precision": 100,
+				"scale": 0
+			},
+			{
+				"name": "start_date",
+				"precision": 19,
+				"scale": 0
+			},
+			{
+				"name": "complete_date",
+				"precision": 19,
+				"scale": 0
+			},
+			{
+				"name": "open_date",
+				"precision": 19,
+				"scale": 0
+			}
+		],
+		"typeProperties": {
+			"tableName": "`qm`"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

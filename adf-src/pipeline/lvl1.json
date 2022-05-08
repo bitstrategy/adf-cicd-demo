@@ -1,0 +1,26 @@
+{
+	"name": "lvl1",
+	"properties": {
+		"activities": [
+			{
+				"name": "Execute Pipeline1",
+				"type": "ExecutePipeline",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "s2",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			}
+		],
+		"folder": {
+			"name": "demo"
+		},
+		"annotations": [],
+		"lastPublishTime": "2022-05-07T05:01:36Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

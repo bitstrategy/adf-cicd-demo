@@ -1,0 +1,25 @@
+{
+	"name": "az_databricks",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "az_databricks",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"table_name": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"type": "SparkObject",
+		"schema": [],
+		"typeProperties": {
+			"schema": "foresight_db",
+			"table": {
+				"value": "@dataset().table_name",
+				"type": "Expression"
+			}
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

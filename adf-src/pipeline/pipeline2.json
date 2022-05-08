@@ -1,0 +1,124 @@
+{
+	"name": "pipeline2",
+	"properties": {
+		"activities": [
+			{
+				"name": "Lookup data source configuration",
+				"type": "Lookup",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "AzureSqlSource",
+						"sqlReaderQuery": {
+							"value": "@SELECT SOURCE_CONTAINER_NAME,SOURCE_FOLDER_PATTERN, SOURCE_FILE_PATTERN, SOURCE_SHEET_NAME, SOURCE_COMPRESSION_TYPE, SINK_TABLE_NAME\nFROM mio.C_DATA_SOURCE\nWHERE DS_TEMPLATE_NAME = pipeline().parameters.DS_TEMPLATE_NAME",
+							"type": "Expression"
+						},
+						"queryTimeout": "02:00:00",
+						"partitionOption": "None"
+					},
+					"dataset": {
+						"referenceName": "azuresql_t2",
+						"type": "DatasetReference"
+					}
+				}
+			},
+			{
+				"name": "Copy data1",
+				"type": "Copy",
+				"dependsOn": [
+					{
+						"activity": "Lookup data source configuration",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "ExcelSource",
+						"storeSettings": {
+							"type": "AzureBlobStorageReadSettings",
+							"recursive": true,
+							"wildcardFolderPath": {
+								"value": "@activity('Lookup data source configuration').output.firstRow.SOURCE_FOLDER_PATTERN",
+								"type": "Expression"
+							},
+							"wildcardFileName": {
+								"value": "@activity('Lookup data source configuration').output.firstRow.SOURCE_FILE_PATTERN",
+								"type": "Expression"
+							},
+							"enablePartitionDiscovery": false
+						}
+					},
+					"sink": {
+						"type": "AzureSqlSink",
+						"preCopyScript": {
+							"value": "TRUNCATE TABLE mio.@{activity('Lookup data source configuration').output.firstRow.SINK_TABLE_NAME}",
+							"type": "Expression"
+						},
+						"writeBehavior": "insert",
+						"sqlWriterUseTableLock": false,
+						"disableMetricsCollection": false
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "excel_data_source_kktest",
+						"type": "DatasetReference",
+						"parameters": {
+							"SOURCE_CONTAINER_NAME": "@activity('Lookup data source configuration').output.firstRow.SOURCE_CONTAINER_NAME",
+							"SOURCE_COMPRESSION_TYPE": "@activity('Lookup data source configuration').output.firstRow.SOURCE_COMPRESSION_TYPE",
+							"SOURCE_SHEET_NAME": "@activity('Lookup data source configuration').output.firstRow.SOURCE_SHEET_NAME",
+							"SOURCE_RANGE": "“”"
+						}
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "Azure_sql_dummy_kktest",
+						"type": "DatasetReference",
+						"parameters": {
+							"TABLE_NAME": "@activity('Lookup data source configuration').output.firstRow.SINK_TABLE_NAME"
+						}
+					}
+				]
+			}
+		],
+		"parameters": {
+			"DS_TEMPLATE_NAME": {
+				"type": "string"
+			}
+		},
+		"folder": {
+			"name": "kktest"
+		},
+		"annotations": [],
+		"lastPublishTime": "2022-02-24T01:49:14Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

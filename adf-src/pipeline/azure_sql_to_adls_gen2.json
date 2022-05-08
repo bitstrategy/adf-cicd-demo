@@ -1,0 +1,650 @@
+{
+	"name": "azure_sql_to_adls_gen2",
+	"properties": {
+		"activities": [
+			{
+				"name": "Copy data1",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "AzureSqlSource",
+						"sqlReaderQuery": "SELECT * FROM sys.tables",
+						"queryTimeout": "02:00:00",
+						"partitionOption": "None"
+					},
+					"sink": {
+						"type": "DelimitedTextSink",
+						"storeSettings": {
+							"type": "AzureBlobFSWriteSettings"
+						},
+						"formatSettings": {
+							"type": "DelimitedTextWriteSettings",
+							"quoteAllText": true,
+							"fileExtension": ".txt"
+						}
+					},
+					"enableStaging": false,
+					"validateDataConsistency": true,
+					"logSettings": {
+						"enableCopyActivityLog": true,
+						"copyActivityLogSettings": {
+							"logLevel": "Warning",
+							"enableReliableLogging": false
+						},
+						"logLocationSettings": {
+							"linkedServiceName": {
+								"referenceName": "aasstorage",
+								"type": "LinkedServiceReference"
+							},
+							"path": "aasbase/log"
+						}
+					},
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "name",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "name",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "object_id",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "object_id",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "principal_id",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "principal_id",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "schema_id",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "schema_id",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "parent_object_id",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "parent_object_id",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "type",
+									"type": "String",
+									"physicalType": "char"
+								},
+								"sink": {
+									"name": "type",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "type_desc",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "type_desc",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "create_date",
+									"type": "DateTime",
+									"physicalType": "datetime"
+								},
+								"sink": {
+									"name": "create_date",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "modify_date",
+									"type": "DateTime",
+									"physicalType": "datetime"
+								},
+								"sink": {
+									"name": "modify_date",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "is_ms_shipped",
+									"type": "Boolean",
+									"physicalType": "bit"
+								},
+								"sink": {
+									"name": "is_ms_shipped",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "is_published",
+									"type": "Boolean",
+									"physicalType": "bit"
+								},
+								"sink": {
+									"name": "is_published",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "is_schema_published",
+									"type": "Boolean",
+									"physicalType": "bit"
+								},
+								"sink": {
+									"name": "is_schema_published",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "lob_data_space_id",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "lob_data_space_id",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "filestream_data_space_id",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "filestream_data_space_id",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "max_column_id_used",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "max_column_id_used",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "lock_on_bulk_load",
+									"type": "Boolean",
+									"physicalType": "bit"
+								},
+								"sink": {
+									"name": "lock_on_bulk_load",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "uses_ansi_nulls",
+									"type": "Boolean",
+									"physicalType": "bit"
+								},
+								"sink": {
+									"name": "uses_ansi_nulls",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "is_replicated",
+									"type": "Boolean",
+									"physicalType": "bit"
+								},
+								"sink": {
+									"name": "is_replicated",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "has_replication_filter",
+									"type": "Boolean",
+									"physicalType": "bit"
+								},
+								"sink": {
+									"name": "has_replication_filter",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "is_merge_published",
+									"type": "Boolean",
+									"physicalType": "bit"
+								},
+								"sink": {
+									"name": "is_merge_published",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "is_sync_tran_subscribed",
+									"type": "Boolean",
+									"physicalType": "bit"
+								},
+								"sink": {
+									"name": "is_sync_tran_subscribed",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "has_unchecked_assembly_data",
+									"type": "Boolean",
+									"physicalType": "bit"
+								},
+								"sink": {
+									"name": "has_unchecked_assembly_data",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "text_in_row_limit",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "text_in_row_limit",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "large_value_types_out_of_row",
+									"type": "Boolean",
+									"physicalType": "bit"
+								},
+								"sink": {
+									"name": "large_value_types_out_of_row",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "is_tracked_by_cdc",
+									"type": "Boolean",
+									"physicalType": "bit"
+								},
+								"sink": {
+									"name": "is_tracked_by_cdc",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "lock_escalation",
+									"type": "Byte",
+									"physicalType": "tinyint"
+								},
+								"sink": {
+									"name": "lock_escalation",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "lock_escalation_desc",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "lock_escalation_desc",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "is_filetable",
+									"type": "Boolean",
+									"physicalType": "bit"
+								},
+								"sink": {
+									"name": "is_filetable",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "is_memory_optimized",
+									"type": "Boolean",
+									"physicalType": "bit"
+								},
+								"sink": {
+									"name": "is_memory_optimized",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "durability",
+									"type": "Byte",
+									"physicalType": "tinyint"
+								},
+								"sink": {
+									"name": "durability",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "durability_desc",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "durability_desc",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "temporal_type",
+									"type": "Byte",
+									"physicalType": "tinyint"
+								},
+								"sink": {
+									"name": "temporal_type",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "temporal_type_desc",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "temporal_type_desc",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "history_table_id",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "history_table_id",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "is_remote_data_archive_enabled",
+									"type": "Boolean",
+									"physicalType": "bit"
+								},
+								"sink": {
+									"name": "is_remote_data_archive_enabled",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "is_external",
+									"type": "Boolean",
+									"physicalType": "bit"
+								},
+								"sink": {
+									"name": "is_external",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "history_retention_period",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "history_retention_period",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "history_retention_period_unit",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "history_retention_period_unit",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "history_retention_period_unit_desc",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "history_retention_period_unit_desc",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "is_node",
+									"type": "Boolean",
+									"physicalType": "bit"
+								},
+								"sink": {
+									"name": "is_node",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "is_edge",
+									"type": "Boolean",
+									"physicalType": "bit"
+								},
+								"sink": {
+									"name": "is_edge",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "data_retention_period",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "data_retention_period",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "data_retention_period_unit",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "data_retention_period_unit",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "data_retention_period_unit_desc",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "data_retention_period_unit_desc",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "ledger_type",
+									"type": "Byte",
+									"physicalType": "tinyint"
+								},
+								"sink": {
+									"name": "ledger_type",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "ledger_type_desc",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "ledger_type_desc",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "ledger_view_id",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "ledger_view_id",
+									"type": "String",
+									"physicalType": "String"
+								}
+							}
+						],
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "azuresql_dummy",
+						"type": "DatasetReference",
+						"parameters": {
+							"TABLE_NAME": "t2"
+						}
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "sys_tables_csv",
+						"type": "DatasetReference"
+					}
+				]
+			}
+		],
+		"folder": {
+			"name": "copy_activity"
+		},
+		"annotations": [],
+		"lastPublishTime": "2022-02-18T08:48:49Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

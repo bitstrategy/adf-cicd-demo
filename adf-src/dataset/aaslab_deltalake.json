@@ -1,0 +1,26 @@
+{
+	"name": "aaslab_deltalake",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "aaslab_deltalake",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"table_name": {
+				"type": "string",
+				"defaultValue": "dm_td_ins"
+			}
+		},
+		"annotations": [],
+		"type": "AzureDatabricksDeltaLakeDataset",
+		"typeProperties": {
+			"database": "work",
+			"table": {
+				"value": "t1",
+				"type": "Expression"
+			}
+		},
+		"schema": []
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

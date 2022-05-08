@@ -1,0 +1,23 @@
+{
+	"name": "bw",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "aasstorage",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Excel",
+		"typeProperties": {
+			"sheetName": "Sheet1",
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "bw.xlsx",
+				"fileSystem": "aasbase"
+			},
+			"range": "",
+			"firstRowAsHeader": true
+		},
+		"schema": []
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

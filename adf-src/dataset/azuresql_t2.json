@@ -1,0 +1,17 @@
+{
+	"name": "azuresql_t2",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "aaslab_azure_sql",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": "mio",
+			"table": "T2"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

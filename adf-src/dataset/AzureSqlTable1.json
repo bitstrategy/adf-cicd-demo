@@ -1,0 +1,34 @@
+{
+	"name": "AzureSqlTable1",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureSqlDatabase1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "channel",
+				"type": "nvarchar"
+			},
+			{
+				"name": "level",
+				"type": "nvarchar"
+			},
+			{
+				"name": "datavalue",
+				"type": "nvarchar"
+			},
+			{
+				"name": "category",
+				"type": "nvarchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "S_kaikaitest1"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}
